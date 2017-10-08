@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta name="apple-mobile-web-app-title" content="Amaze UI" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>停车场管理员侧边栏页面</title>
+<link rel="icon" type="image/png" href="../assets/i/favicon.png">
+<link rel="stylesheet" href="../assets/css/amazeui.min.css" />
+<link rel="stylesheet" href="../assets/css/admin.css">
+<link rel="stylesheet" href="../assets/css/app.css">
+<script src="../assets/js/echarts.min.js"></script>
+
+<style type="text/css">
+li.tpl-left-nav-item span font {
+		font-size:17px;
+	}
+
+.tpl-left-nav-title {
+	font-size:18px;
+	margin-bottom:10px;
+}
+</style>
+
+</head>
+<body data-type="index">
+
+	<!-- 	<div class="tpl-left-nav tpl-left-nav-hover"> -->
+	<div class="tpl-left-nav-title">停车场管理员</div>
+	<div class="tpl-left-nav-list">
+		<ul class="tpl-left-nav-menu">
+			<!-- <li class="tpl-left-nav-item"><a href="index.html"
+				class="nav-link active"> <span>首页</span>
+			</a></li>
+			<li class="tpl-left-nav-item"><a href="chart.html"
+				class="nav-link tpl-left-nav-link-list"> <span>数据表</span>
+			</a></li> -->
+
+			<li class="tpl-left-nav-item"><a href="javascript:;"
+				class="nav-link tpl-left-nav-link-list"> <span><font>分时购买管理</font></span> <i
+					class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+			</a>
+				<ul class="tpl-left-nav-sub-menu">
+					<li><a href="Buy/NewBuy.html" target="right" > <span>新增购买信息</span>
+					</a> <a href="Buy/QueryBuy.html" target="right" > <span>查看购买信息</span>
+					</a> <a href="Buy/CanBuy.html" target="right" > <span>可供购买信息</span>
+					</a> </li>
+				</ul></li>
+			<li class="tpl-left-nav-item"><a href="javascript:;"
+				class="nav-link tpl-left-nav-link-list"> <span><font>车辆出入信息管理</font></span> <i
+					class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+			</a>
+				<ul class="tpl-left-nav-sub-menu">
+					<li><a href="InOut/NewIn.html" target="right" > <span>新增进入信息</span>
+					</a><a href="InOut/NewOut.html" target="right" > <span>新增离开信息</span>
+					</a> <a href="InOut/QueryInOut.html" target="right" > <span>查看出入信息</span>
+					</a> </li>
+				</ul></li>
+			<li class="tpl-left-nav-item"><a href="javascript:;"
+				class="nav-link tpl-left-nav-link-list"> <span><font>普通业主信息管理</font></span> <i
+					class="am-icon-angle-right tpl-left-nav-more-ico am-fr am-margin-right"></i>
+			</a>
+				<ul class="tpl-left-nav-sub-menu">
+					<li><a href="CommonUser/QueryUser.html" target="right" > <span>查看普通业主信息</span>
+					</a> </li>
+				</ul></li>
+				<li class="tpl-left-nav-item"><a href="#" onclick="exit()"
+				class="nav-link tpl-left-nav-link-list">  <span><font>退出</font></span>
+			</a></li>
+			<!-- <li class="tpl-left-nav-item"><a href="login.html"
+				class="nav-link tpl-left-nav-link-list"> </i> <span>登录</span>
+			</a></li> -->
+		</ul>
+	</div>
+	<!-- 	</div> -->
+
+	<script src="../assets/js/jquery.min.js"></script>
+	<script src="../assets/js/amazeui.min.js"></script>
+	<script src="../assets/js/iscroll.js"></script>
+	<script src="../assets/js/app.js"></script>
+</body>
+<script>
+function exit() {
+	var a = confirm("确定退出吗？");
+	if (a==true) {
+		parent.location.href="../login.html";
+	} else {}
+}
+</script>
+</html>

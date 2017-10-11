@@ -2,11 +2,31 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>Shared_Parking_Space</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>login.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.dyf.common.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AddParklotAdminInfoDao</servlet-name>
+    <servlet-class>com.dyf.dao.systemadmin.parklotadmininfo.AddParklotAdminInfoDao</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>QueryParklotAdminInfoDao</servlet-name>
+  	<servlet-class>com.dyf.dao.systemadmin.parklotadmininfo.QueryParklotAdminInfoDao</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/servlet/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddParklotAdminInfoDao</servlet-name>
+    <url-pattern>/AddParklotAdminInfoDao</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>QueryParklotAdminInfoDao</servlet-name>
+  	<url-pattern>/QueryParklotAdminInfoDao</url-pattern>
+  </servlet-mapping>
 </web-app>

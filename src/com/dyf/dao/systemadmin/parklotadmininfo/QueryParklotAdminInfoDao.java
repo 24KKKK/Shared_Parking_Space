@@ -32,7 +32,7 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 		DBBean db = new DBBean();
 		String querySql = "select parklotAdminId,parklotAdminPhone,parklotAdminAge,"
 				+ "parklotAdminIdnumber,parklotAdminName,parklotAdminLoginId,"
-				+ "parklotAdminLoginPass,parklotAdminCreatedTime from table_parklotadmininfo";
+				+ "parklotAdminLoginPass,parklotAdminCreatedTime from table_parklotadmininfo limit 3,6";
 		ResultSet rs = db.executeQuery(querySql);
 		try {
 			while(rs.next()) {
@@ -45,21 +45,19 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 				String loginid = rs.getString("parklotAdminLoginId");
 				String loginpass = rs.getString("parklotAdminLoginPass");
 				String createdTime = rs.getString("parklotAdminCreatedTime");
+				SysoUtils.print(id+" "+phone+" "+age+" "+idnumber+" "+name+" "+loginid+" "+loginpass+" "+createdTime);
 				Table_ParklotAdminInfo table_ParklotAdminInfo = new Table_ParklotAdminInfo(id,phone,age,idnumber,name,loginid,loginpass,createdTime);;
 				parklotAdminInfos.add(table_ParklotAdminInfo);
 			}
-			SysoUtils.print("parklotAdminInfos:"+parklotAdminInfos.toString());
 			request.setAttribute("parklotAdminInfos", parklotAdminInfos);
-			request.getRequestDispatcher("/Systemadmin/ParkinglotAdminInfo/QueryParkinglotAdmin.html").forward(request, response);
+			request.getRequestDispatcher("/Systemadmin/ParkinglotAdminInfo/ShowParklotAdminInfo.jsp").forward(request, response);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			try {
 				rs.close();
 				db.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

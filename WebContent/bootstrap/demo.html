@@ -3,26 +3,98 @@
 <!-- 把CSS文件放在head中，把js文件放在body的最下面 -->
 
 <html lang="en">
-  <head>
-	<!-- 页面编码 -->
-    <meta charset="GBK">
-	<!-- 在ie中运行最新的渲染模式 -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- 初始化移动浏览显示，viewport控制大小和缩放，initial-scale=1设置初始缩放比例，1为不缩放，device-width页面宽度等于设备宽度 -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>demo</title>
+<head>
+<!-- 页面编码 -->
+<meta charset="GBK">
+<!-- 在ie中运行最新的渲染模式 -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 初始化移动浏览显示，viewport控制大小和缩放，initial-scale=1设置初始缩放比例，1为不缩放，device-width页面宽度等于设备宽度 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<title>demo</title>
 
-    <!-- Bootstrap -->
-	<!-- 载入bootstrap的CSS样式 -->
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-	
-  </head>
-  <body>
+<!-- Bootstrap -->
+<!-- 载入bootstrap的CSS样式 -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<div class="pagination pagination-right pagination-large">
+				<ul>
+					<li>
+						<a href="#">上一页</a>
+					</li>
+					<li>
+						<a href="#">1</a>
+					</li>
+					<li>
+						<a href="#">2</a>
+					</li>
+					<li>
+						<a href="#">3</a>
+					</li>
+					<li>
+						<a href="#">4</a>
+					</li>
+					<li>
+						<a href="#">5</a>
+					</li>
+					<li>
+						<a href="#">下一页</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="pagination pagination-right pagination-large">
+<ul contenteditable="true">
+	<li><a href="#">上一页</a></li>
+	<li><a href="#">1</a></li>
+	<li><a href="#">2</a></li>
+	<li><a href="#">3</a></li>
+	<li><a href="#">4</a></li>
+	<li><a href="#">5</a></li>
+	<li><a href="#">下一页</a></li>
+</ul>
+</div>
+
+	<button class="btn btn-default value="按钮" >按钮</button>
+
+	<!-- 16:9 aspect ratio -->
+	<div class="embed-responsive embed-responsive-16by9">
+		<iframe class="embed-responsive-item" src="NewParkinglotAdmin.html"></iframe>
+		<iframe class="embed-responsive-item" src="NewParkinglotAdmin.html"></iframe>
+	</div>
+
+	<table class="table">
+
+		<tr>
+			<td>一行</td>
+			<td>一行</td>
+			<td>一行</td>
+			<td>一行</td>
+		</tr>
+		<tr>
+			<td>一行</td>
+			<td>一行</td>
+			<td>一行</td>
+			<td>一行</td>
+		</tr>
+		<tr>
+			<td>一行</td>
+			<td>一行</td>
+			<td>一行</td>
+			<td>一行</td>
+		</tr>
+
+	</table>
 	<div class="dropdown">
-		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
-			这是按钮
-			<span class="caret"></span>
+		<button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			这是按钮 <span class="caret"></span>
 		</button>
 		<ul class=dropdown-menu">
 			<li><a href="http://www.imooc.com">慕课网</a></li>
@@ -30,9 +102,9 @@
 			<li><a href="http://www.imooc.com">慕课网</a></li>
 		</ul>
 	</div>
-	
+
 	<script src="bootstrap-3.3.7-dist/js/jquery-1.9.1.min.js"></script>
 	<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-	
-  </body>
+
+</body>
 </html>

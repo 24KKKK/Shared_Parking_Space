@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>新增停车场管理员信息</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body bgcolor="#ccd9ff">
+	<!-- 新增停车场管理员信息<br><br> -->
+	<br>
+	<br>
+
+	<form class="form-horizontal" name="form_newParkinglotAdminInfo"
+		action="../../AddParklotAdminInfoDao" method="post">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">编号</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_parklotadminid" name="parklotadminid"
+					placeholder="请输入编号">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">电话</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_parklotadminphone" name="parklotadminphone"
+					placeholder="请输入电话，例如：13478394271">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">年龄</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_parklotadminage" name="parklotadminage"
+					placeholder="请输入年龄，例如：20">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">身份证号</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_parklotadminidnumber" name="parklotadminidnumber"
+					placeholder="请输入身份证号">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">姓名</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_parklotadminname" name="parklotadminname"
+					placeholder="请输入姓名，例如：张三">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">登录账号</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_parklotadminloginid" name="parklotadminloginid"
+					placeholder="请输入登录账号">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">密码</label>
+			<div class="col-sm-5">
+				<input type="password" class="form-control"
+					id="input_text_parklotadminloginpass" name="parklotadminloginpass"
+					placeholder="请输入密码">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-8">
+				<button type="submit" class="btn btn-default btn-success"
+					name="submit_addparkinglotadmininfo">保存</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="reset" class="btn btn-default btn-warning">重置</button>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

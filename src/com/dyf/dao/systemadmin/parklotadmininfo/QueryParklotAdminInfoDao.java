@@ -26,22 +26,48 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("utf-8");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		
 		//获取分页传过来的页码号
 		String strPageNum = request.getParameter("pagenum");
-		int pageNum = 0;
+		int pageNum = 1;
 		if (strPageNum!=null) {
 			SysoUtils.print("页码号：" + strPageNum);
 			pageNum = Integer.parseInt(strPageNum);
+		}
+		
+		//获取查询条件
+		String selectKey = request.getParameter("selectkey");
+		String selectValue = request.getParameter("selectvalue");
+		SysoUtils.print("selectkey:" + selectKey + " selectvalue:" + selectValue);
+		String whereSql = "";
+		if (selectKey != null && selectValue != null) {
+			switch (selectKey) {
+			case "parklotname":
+				SysoUtils.print(selectKey+"  "+selectValue);
+				whereSql = "where parklotAdminId LIKE '%"+ selectValue +"%'";
+				break;
+			case "parklotadminphone":
+				whereSql = "where parklotAdminPhone LIKE '%"+ selectValue +"%'";
+				break;
+			case "parklotadminname":
+				whereSql = "where parklotAdminName LIKE '%"+ selectValue +"%' ";
+				break;
+
+			default:
+				break;
+			} 
 		}
 		
 		List<Table_ParklotAdminInfo> parklotAdminInfos = new ArrayList<Table_ParklotAdminInfo>();
 		DBBean db = new DBBean();
 		String querySql = "select parklotAdminId,parklotAdminPhone,parklotAdminAge,"
 				+ "parklotAdminIdnumber,parklotAdminName,parklotAdminLoginId,"
-				+ "parklotAdminLoginPass,parklotAdminCreatedTime from table_parklotadmininfo limit "+ pageNum +",7";
+				+ "parklotAdminLoginPass,parklotAdminCreatedTime "
+				+ "from table_parklotadmininfo "
+				+ whereSql
+				+ " group by parklotAdminCreatedTime desc limit " + (pageNum-1)*6 +",6";
 		SysoUtils.print("querySql:" + querySql);
 		ResultSet rs = db.executeQuery(querySql);
 		try {
@@ -59,6 +85,7 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 				Table_ParklotAdminInfo table_ParklotAdminInfo = new Table_ParklotAdminInfo(id,phone,age,idnumber,name,loginid,loginpass,createdTime);;
 				parklotAdminInfos.add(table_ParklotAdminInfo);
 			}
+			response.setCharacterEncoding("utf-8");
 			request.setAttribute("parklotAdminInfos", parklotAdminInfos);
 			request.getRequestDispatcher("/Systemadmin/ParkinglotAdminInfo/ShowParklotAdminInfo.jsp").forward(request, response);
 		} catch (SQLException e) {
@@ -73,8 +100,8 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
 	}
 
 }

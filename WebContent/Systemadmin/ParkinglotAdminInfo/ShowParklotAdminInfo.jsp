@@ -9,17 +9,54 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta chartset="utf-8">
+<meta charset="utf-8">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
 <title>显示停车场管理员信息</title>
 <link href="/Shared_Parking_Space/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
+<script type="text/javascript">
+	function del() {
+		var a = confirm("确定删除吗？");
+		if (a == true) {
+			//parent.location.href = "login.html";
+		} else {
+		}
+	}
+	
+	/* $(function(){
+		var message = $("#input_text_selectinfo").val();
+		alert(message);
+		 if($("#input_text_selectinfo").innerText!=null){
+			$("#page").hide();
+		} 
+	}) */
+</script>
 </head>
 
 <body>
-	<table class="table table-striped table-hover">
+	<br>
+
+	<!-- 停车场管理员筛选条件 -->
+	<form class="form-inline" action="/Shared_Parking_Space/QueryParklotAdminInfoDao" method="post">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		<div class="form-group">
+			<select class="form-control col-xs-4" name="selectkey">
+				<option value="parklotname">停车场名称</option>
+				<option value="parklotadminphone">电话</option>
+				<option value="parklotadminname">管理员姓名</option>
+			</select> 
+			<input type="text" class="form-control"
+				id="input_text_selectinfo" name="selectvalue">
+		</div>
+		<button type="submit" class="btn btn-success">查询</button>
+	</form>
+	<br>
+
+	<!-- 显示停车场管理员基本信息 -->
+	<table name="table_listParklotAdminInfo" class="table table-striped table-hover">
 		<tr>
 			<th>ID</th>
 			<th>电话</th>
@@ -45,10 +82,12 @@
 			String loginId = null;
 			String loginPass = null;
 			String createdTime = null;
-			if (parklotAdminInfoList != null) {
+			//SysoUtils.print("parklotAdminInfoList:"+parklotAdminInfoList);
+			//SysoUtils.print("parklotAdminInfoList.size():"+parklotAdminInfoList.size());
+			if (null != parklotAdminInfoList && parklotAdminInfoList.size() != 0) {
 				for (Table_ParklotAdminInfo parklotAdminInfo : parklotAdminInfoList) {
 					id = parklotAdminInfo.getParklotAdminId();
-					phone = parklotAdminInfo.getParklotAdminId();
+					phone = parklotAdminInfo.getParklotAdminPhone();
 					age = parklotAdminInfo.getParklotAdminAge();
 					idnumber = parklotAdminInfo.getParklotAdminIdnumber();
 					name = parklotAdminInfo.getParklotAdminName();
@@ -72,25 +111,30 @@
 
 		<%
 			}
-			} else {
-				out.println("没有记录");
+			} else  {
+			%>
+			<tr><td>没有记录</td></tr>
+			<%
 			}
 		%>
 
 	</table>
 
 	<!-- 分页组件 -->
-	<div class="container" align="right">
+	<div id="page" class="container" align="right">
 		<ul class="pagination pagination-lg">
 			<!-- <li><a href="#">上一页</a></li> -->
 			<%
-				int pageNum = Page.getPageNum("table_parklotadmininfo", 7);
+			if (parklotAdminInfoList.size() ==6 ){
+				int pageNum = Page.getPageNum("table_parklotadmininfo", 6);
+			//int pageNum = Page.getPageNum(parklotAdminInfoList.size(), 6);
 				for (int i = 1; i <= pageNum; i++) {
 			%>
 			<li><a
 				href="/Shared_Parking_Space/QueryParklotAdminInfoDao?pagenum=<%=i%>"><%=i%></a></li>
 			<%
 				}
+			}
 			%>
 			<!-- <li><a href="#">下一页</a></li> -->
 		</ul>
@@ -99,13 +143,18 @@
 	<script src="/Shared_Parking_Space/bootstrap/js/jquery.1.9.1.min.js"></script>
 	<script src="/Shared_Parking_Space/bootstrap/js/bootstrap.min.js"></script>
 </body>
-<script>
-	function del() {
-		var a = confirm("确定删除吗？");
-		if (a == true) {
-			//parent.location.href = "login.html";
-		} else {
-		}
-	}
-</script>
+
 </html>
+
+<!-- <div class="form-group">
+			<label for="">停车场名称</label> <input type="text"
+				class="form-control" id="input_text_parklotname" name="parklotname">
+		</div>
+		<div class="form-group">
+			<label for="">电话</label> <input type="text"
+				class="form-control" id="input_text_parklotadminphone" name="parklotadminphone" >
+		</div>
+		<div class="form-group">
+			<label for="">管理员姓名</label> <input type="text"
+				class="form-control" id="input_text_parklotadminname" name="parklotadminname" >
+		</div> -->

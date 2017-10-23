@@ -82,27 +82,28 @@
 	<!-- 分页组件 -->
 	<div class="container" align="right">
 		<ul class="pagination pagination-lg">
-			<li><a href="#">上一页</a></li>
+			<!-- <li><a href="#">上一页</a></li> -->
 			<%
-				int pageNum = Page.getPageNum("table_parklotadmininfo", 15);
+				int pageNum = Page.getPageNum("table_parklotadmininfo", 7);
 				for (int i = 1; i <= pageNum; i++) {
 			%>
-			<li><a href="#"><%=i%></a></li>
+			<li><a
+				href="/Shared_Parking_Space/QueryParklotAdminInfoDao?pagenum=<%=i%>"><%=i%></a></li>
 			<%
 				}
 			%>
-			<li><a href="#">下一页</a></li>
+			<!-- <li><a href="#">下一页</a></li> -->
 		</ul>
 	</div>
 	<!-- 分页结束 -->
-	<script src="/Shared_Parking_Space/bootstrap/js/jquery-1.9.1.min.js"></script>
+	<script src="/Shared_Parking_Space/bootstrap/js/jquery.1.9.1.min.js"></script>
 	<script src="/Shared_Parking_Space/bootstrap/js/bootstrap.min.js"></script>
 </body>
 <script>
 	function del() {
 		var a = confirm("确定删除吗？");
 		if (a == true) {
-			parent.location.href = "../login.html";
+			//parent.location.href = "login.html";
 		} else {
 		}
 	}

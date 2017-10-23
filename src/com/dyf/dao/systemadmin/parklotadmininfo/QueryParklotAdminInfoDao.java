@@ -28,11 +28,21 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("utf-8");
+		
+		//获取分页传过来的页码号
+		String strPageNum = request.getParameter("pagenum");
+		int pageNum = 0;
+		if (strPageNum!=null) {
+			SysoUtils.print("页码号：" + strPageNum);
+			pageNum = Integer.parseInt(strPageNum);
+		}
+		
 		List<Table_ParklotAdminInfo> parklotAdminInfos = new ArrayList<Table_ParklotAdminInfo>();
 		DBBean db = new DBBean();
 		String querySql = "select parklotAdminId,parklotAdminPhone,parklotAdminAge,"
 				+ "parklotAdminIdnumber,parklotAdminName,parklotAdminLoginId,"
-				+ "parklotAdminLoginPass,parklotAdminCreatedTime from table_parklotadmininfo limit 3,6";
+				+ "parklotAdminLoginPass,parklotAdminCreatedTime from table_parklotadmininfo limit "+ pageNum +",7";
+		SysoUtils.print("querySql:" + querySql);
 		ResultSet rs = db.executeQuery(querySql);
 		try {
 			while(rs.next()) {

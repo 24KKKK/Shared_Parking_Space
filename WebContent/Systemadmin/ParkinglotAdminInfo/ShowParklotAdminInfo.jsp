@@ -105,7 +105,7 @@
 			<td><%=loginId%></td>
 			<td><%=loginPass%></td>
 			<td><%=createdTime%></td>
-			<td><a class="btn btn-warning" href="">修改</a> <a
+			<td><a class="btn btn-warning" href="UpdateParklotAdminInfoDao?id=<%=id%>">修改</a> <a
 				class="btn btn-danger" href="" onclick="del()">删除</a></td>
 		</tr>
 

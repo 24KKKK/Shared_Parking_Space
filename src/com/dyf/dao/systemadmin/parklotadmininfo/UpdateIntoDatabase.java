@@ -13,16 +13,11 @@ import com.dyf.bean.DBBean;
 import com.dyf.utils.CreateDate;
 import com.dyf.utils.SysoUtils;
 
-/**
- * 描述：将停车场管理员基本信息插入数据库 
- */
-@WebServlet(name="AddParklotAdminInfoDao", 
-			urlPatterns={"/AddParklotAdminInfoDao","/*/AddParklotAdminInfoDao"},
-			description="增加停车场管理员信息")
-public class AddParklotAdminInfoDao extends HttpServlet {
+@WebServlet(description = "将修改过的停车场管理员信息放入数据库", urlPatterns = { "/UpdateIntoDatabase" })
+public class UpdateIntoDatabase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public AddParklotAdminInfoDao() {
+	public UpdateIntoDatabase() {
 		super();
 	}
 
@@ -32,7 +27,7 @@ public class AddParklotAdminInfoDao extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-
+		
 		String parklotAdminId = request.getParameter("parklotadminid");
 		String parklotAdminPhone = request.getParameter("parklotadminphone");
 		int parklotAdminAge = Integer.parseInt(request.getParameter("parklotadminage"));
@@ -40,31 +35,34 @@ public class AddParklotAdminInfoDao extends HttpServlet {
 		String parklotAdminName = request.getParameter("parklotadminname");
 		String parklotAdminLoginId = request.getParameter("parklotadminloginid");
 		String parklotAdminLoginPass = request.getParameter("parklotadminloginpass");
-		String parklotAdminCreatedTime = CreateDate.getDate();
-		SysoUtils.print(parklotAdminId + " " + parklotAdminPhone + " " + parklotAdminAge + " " + parklotAdminIdnumber
-				+ " " + parklotAdminName + " " + parklotAdminLoginId + " " + parklotAdminLoginPass + " "
-				+ parklotAdminCreatedTime);
 
-		String insertSql = "insert into table_parklotAdminInfo (parklotadminid,"
-				+ "parklotadminphone,parklotadminage,parklotadminidnumber,parklotadminname,"
-				+ "parklotadminloginid,parklotadminloginpass,parklotAdminCreatedTime) values('" + parklotAdminId + "','"
-				+ parklotAdminPhone + "'," + parklotAdminAge + ",'" + parklotAdminIdnumber + "','" + parklotAdminName
-				+ "'," + "'" + parklotAdminLoginId + "','" + parklotAdminLoginPass + "','" + parklotAdminCreatedTime
-				+ "')";
-		SysoUtils.print("insertSql=" + insertSql);
+		SysoUtils.print("修改后的传过来的值为：");
+		SysoUtils.print(parklotAdminId + " " + parklotAdminPhone + " " + parklotAdminAge + " " + parklotAdminIdnumber
+				+ " " + parklotAdminName + " " + parklotAdminLoginId + " " + parklotAdminLoginPass);
+
+		String updateSql = "update table_parklotAdminInfo set parklotAdminPhone=" + "'" + parklotAdminPhone + "'"
+				+ ",parklotAdminAge=" + "'" + parklotAdminAge + "'" 
+				+ ",parklotAdminIdnumber=" + "'" + parklotAdminIdnumber+ "'" 
+				+ ",parklotAdminName=" + "'" + parklotAdminName + "'" 
+				+ ",parklotAdminLoginId=" + "'"+ parklotAdminLoginId + "'" 
+				+ ",parklotAdminLoginPass=" + "'" + parklotAdminLoginPass + "'"
+				+ "where parklotAdminId=" + "'"+parklotAdminId+"'";
+
+		SysoUtils.print("updateSql=" + updateSql);
 
 		DBBean db = new DBBean();
-		int i = db.executeUpdate(insertSql);
+		int i = db.executeUpdate(updateSql);
+		SysoUtils.print("update i="+i);
 		if (i == 1) {
+			SysoUtils.print("修改停车场管理员信息成功。");
 			PrintWriter out = response.getWriter();
-			SysoUtils.print("添加停车场管理员信息成功。");
-			out.println("<script type='text/javascript'> alert('添加成功');</script>");
-			response.setHeader("refresh", "0;url=Systemadmin/ParkinglotAdminInfo/NewParkinglotAdmin.html");
+			out.println("<script type='text/javascript'> alert('更新成功');</script>");
+			response.setHeader("refresh", "0;url=QueryParklotAdminInfoDao");
 		} else {
-			SysoUtils.print("添加停车场管理员信息失败。");
+			SysoUtils.print("修改停车场管理员信息失败。");
 			PrintWriter out = response.getWriter();
-			out.println("<script type='text/javascript'> alert('添加失败');</script>");
-			response.setHeader("refresh", "0;url=Systemadmin/ParkinglotAdminInfo/NewParkinglotAdmin.html");
+			out.println("<script type='text/javascript'> alert('更新失败');</script>");
+			response.setHeader("refresh", "0;url=QueryParklotAdminInfoDao");
 		}
 		db.close();
 	}

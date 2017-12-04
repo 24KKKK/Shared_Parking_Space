@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +20,9 @@ import com.dyf.utils.SysoUtils;
 /**
  * Servlet implementation class QueryParklotAdminInfo
  */
+@WebServlet(name="QueryParklotAdminInfoDao", 
+			urlPatterns={"/QueryParklotAdminInfoDao"},
+			description="查询停车场管理员信息")
 public class QueryParklotAdminInfoDao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,6 +32,8 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		//获取分页传过来的页码号
 		String strPageNum = request.getParameter("pagenum");

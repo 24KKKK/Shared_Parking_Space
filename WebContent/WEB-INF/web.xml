@@ -8,25 +8,8 @@
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.dyf.common.LoginServlet</servlet-class>
   </servlet>
-  <servlet>
-    <servlet-name>AddParklotAdminInfoDao</servlet-name>
-    <servlet-class>com.dyf.dao.systemadmin.parklotadmininfo.AddParklotAdminInfoDao</servlet-class>
-  </servlet>
-  <servlet>
-  	<servlet-name>QueryParklotAdminInfoDao</servlet-name>
-  	<servlet-class>com.dyf.dao.systemadmin.parklotadmininfo.QueryParklotAdminInfoDao</servlet-class>
-  </servlet>
-  
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/servlet/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>AddParklotAdminInfoDao</servlet-name>
-    <url-pattern>/AddParklotAdminInfoDao</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-  	<servlet-name>QueryParklotAdminInfoDao</servlet-name>
-  	<url-pattern>/QueryParklotAdminInfoDao</url-pattern>
   </servlet-mapping>
 </web-app>

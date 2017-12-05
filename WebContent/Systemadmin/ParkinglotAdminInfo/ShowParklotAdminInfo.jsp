@@ -17,21 +17,17 @@
 <link href="/Shared_Parking_Space/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 <script type="text/javascript">
-	function del() {
+	function del(infoID) {
+		//alert("infoID="+infoID);
 		var a = confirm("确定删除吗？");
 		if (a == true) {
+			window.location.href = "/Shared_Parking_Space/DeleteParklotAdminInfoDao?id="
+					+ infoID;
 			//parent.location.href = "login.html";
 		} else {
+
 		}
 	}
-	
-	/* $(function(){
-		var message = $("#input_text_selectinfo").val();
-		alert(message);
-		 if($("#input_text_selectinfo").innerText!=null){
-			$("#page").hide();
-		} 
-	}) */
 </script>
 </head>
 
@@ -39,24 +35,25 @@
 	<br>
 
 	<!-- 停车场管理员筛选条件 -->
-	<form class="form-inline" action="/Shared_Parking_Space/QueryParklotAdminInfoDao" method="post">
+	<form class="form-inline"
+		action="/Shared_Parking_Space/QueryParklotAdminInfoDao" method="post">
 		&nbsp;&nbsp;&nbsp;&nbsp;
-		
+
 		<div class="form-group">
 			<select class="form-control col-xs-4" name="selectkey">
 				<option value="parklotname">停车场名称</option>
 				<option value="parklotadminphone">电话</option>
 				<option value="parklotadminname">管理员姓名</option>
-			</select> 
-			<input type="text" class="form-control"
-				id="input_text_selectinfo" name="selectvalue">
+			</select> <input type="text" class="form-control" id="input_text_selectinfo"
+				name="selectvalue">
 		</div>
 		<button type="submit" class="btn btn-success">查询</button>
 	</form>
 	<br>
 
 	<!-- 显示停车场管理员基本信息 -->
-	<table name="table_listParklotAdminInfo" class="table table-striped table-hover">
+	<table name="table_listParklotAdminInfo"
+		class="table table-striped table-hover">
 		<tr>
 			<th>ID</th>
 			<th>电话</th>
@@ -95,7 +92,6 @@
 					loginPass = parklotAdminInfo.getParklotAdminLoginPass();
 					createdTime = parklotAdminInfo.getParklotAdminCreatedTime();
 		%>
-
 		<tr>
 			<td><%=id%></td>
 			<td><%=phone%></td>
@@ -105,16 +101,19 @@
 			<td><%=loginId%></td>
 			<td><%=loginPass%></td>
 			<td><%=createdTime%></td>
-			<td><a class="btn btn-warning" href="UpdateParklotAdminInfoDao?id=<%=id%>">修改</a> <a
-				class="btn btn-danger" href="" onclick="del()">删除</a></td>
+			<td><a class="btn btn-warning"
+				href="UpdateParklotAdminInfoDao?id=<%=id%>">修改</a> <a
+				class="btn btn-danger" onclick="del('<%=id%>')">删除</a></td>
 		</tr>
 
 		<%
 			}
-			} else  {
-			%>
-			<tr><td>没有记录</td></tr>
-			<%
+			} else {
+		%>
+		<tr>
+			<td>没有记录</td>
+		</tr>
+		<%
 			}
 		%>
 
@@ -125,16 +124,16 @@
 		<ul class="pagination pagination-lg">
 			<!-- <li><a href="#">上一页</a></li> -->
 			<%
-			if (parklotAdminInfoList.size() ==6 ){
-				int pageNum = Page.getPageNum("table_parklotadmininfo", 6);
-			//int pageNum = Page.getPageNum(parklotAdminInfoList.size(), 6);
-				for (int i = 1; i <= pageNum; i++) {
+				if (parklotAdminInfoList.size() == 6) {
+					int pageNum = Page.getPageNum("table_parklotadmininfo", 6);
+					//int pageNum = Page.getPageNum(parklotAdminInfoList.size(), 6);
+					for (int i = 1; i <= pageNum; i++) {
 			%>
 			<li><a
 				href="/Shared_Parking_Space/QueryParklotAdminInfoDao?pagenum=<%=i%>"><%=i%></a></li>
 			<%
 				}
-			}
+				}
 			%>
 			<!-- <li><a href="#">下一页</a></li> -->
 		</ul>
@@ -145,16 +144,3 @@
 </body>
 
 </html>
-
-<!-- <div class="form-group">
-			<label for="">停车场名称</label> <input type="text"
-				class="form-control" id="input_text_parklotname" name="parklotname">
-		</div>
-		<div class="form-group">
-			<label for="">电话</label> <input type="text"
-				class="form-control" id="input_text_parklotadminphone" name="parklotadminphone" >
-		</div>
-		<div class="form-group">
-			<label for="">管理员姓名</label> <input type="text"
-				class="form-control" id="input_text_parklotadminname" name="parklotadminname" >
-		</div> -->

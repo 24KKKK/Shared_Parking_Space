@@ -16,9 +16,8 @@ import com.dyf.bean.DBBean;
 import com.dyf.model.Table_ParklotAdminInfo;
 import com.dyf.utils.SysoUtils;
 
-@WebServlet(name="UpdateParklotAdminInfoDao", 
-			urlPatterns = { "/UpdateParklotAdminInfoDao" },
-			description = "修改停车场管理员信息")
+@WebServlet(name = "UpdateParklotAdminInfoDao", urlPatterns = {
+		"/UpdateParklotAdminInfoDao" }, description = "修改停车场管理员信息")
 public class UpdateParklotAdminInfoDao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -28,7 +27,7 @@ public class UpdateParklotAdminInfoDao extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+
 		String id = new String(request.getParameter("id").getBytes("ISO-8859-1"), "UTF-8");
 		SysoUtils.print("修改的修改id：" + id);
 

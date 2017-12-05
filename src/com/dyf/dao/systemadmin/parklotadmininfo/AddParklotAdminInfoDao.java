@@ -14,11 +14,10 @@ import com.dyf.utils.CreateDate;
 import com.dyf.utils.SysoUtils;
 
 /**
- * 描述：将停车场管理员基本信息插入数据库 
+ * 描述：将停车场管理员基本信息插入数据库
  */
-@WebServlet(name="AddParklotAdminInfoDao", 
-			urlPatterns={"/AddParklotAdminInfoDao","/*/AddParklotAdminInfoDao"},
-			description="增加停车场管理员信息")
+@WebServlet(name = "AddParklotAdminInfoDao", urlPatterns = { "/AddParklotAdminInfoDao",
+		"/*/AddParklotAdminInfoDao" }, description = "增加停车场管理员信息")
 public class AddParklotAdminInfoDao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

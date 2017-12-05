@@ -27,7 +27,7 @@ public class UpdateIntoDatabase extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
+
 		String parklotAdminId = request.getParameter("parklotadminid");
 		String parklotAdminPhone = request.getParameter("parklotadminphone");
 		int parklotAdminAge = Integer.parseInt(request.getParameter("parklotadminage"));
@@ -41,18 +41,16 @@ public class UpdateIntoDatabase extends HttpServlet {
 				+ " " + parklotAdminName + " " + parklotAdminLoginId + " " + parklotAdminLoginPass);
 
 		String updateSql = "update table_parklotAdminInfo set parklotAdminPhone=" + "'" + parklotAdminPhone + "'"
-				+ ",parklotAdminAge=" + "'" + parklotAdminAge + "'" 
-				+ ",parklotAdminIdnumber=" + "'" + parklotAdminIdnumber+ "'" 
-				+ ",parklotAdminName=" + "'" + parklotAdminName + "'" 
-				+ ",parklotAdminLoginId=" + "'"+ parklotAdminLoginId + "'" 
-				+ ",parklotAdminLoginPass=" + "'" + parklotAdminLoginPass + "'"
-				+ "where parklotAdminId=" + "'"+parklotAdminId+"'";
+				+ ",parklotAdminAge=" + "'" + parklotAdminAge + "'" + ",parklotAdminIdnumber=" + "'"
+				+ parklotAdminIdnumber + "'" + ",parklotAdminName=" + "'" + parklotAdminName + "'"
+				+ ",parklotAdminLoginId=" + "'" + parklotAdminLoginId + "'" + ",parklotAdminLoginPass=" + "'"
+				+ parklotAdminLoginPass + "'" + "where parklotAdminId=" + "'" + parklotAdminId + "'";
 
 		SysoUtils.print("updateSql=" + updateSql);
 
 		DBBean db = new DBBean();
 		int i = db.executeUpdate(updateSql);
-		SysoUtils.print("update i="+i);
+		SysoUtils.print("update i=" + i);
 		if (i == 1) {
 			SysoUtils.print("修改停车场管理员信息成功。");
 			PrintWriter out = response.getWriter();

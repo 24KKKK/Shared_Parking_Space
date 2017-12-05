@@ -50,7 +50,8 @@
 			}
 		}
 	%>
-	<br><br>
+	<br>
+	<br>
 	<form class="form-horizontal" name="form_UpdateParklotAdminInfo"
 		action="UpdateIntoDatabase" method="post">
 		<div class="form-group">
@@ -115,8 +116,8 @@
 					name="submit_addparkinglotadmininfo">保存</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="reset" class="btn btn-default btn-warning">重置</button>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a href="QueryParklotAdminInfoDao" class="btn btn-default btn-info">返回</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+					href="QueryParklotAdminInfoDao" class="btn btn-default btn-info">返回</a>
 			</div>
 		</div>
 	</form>

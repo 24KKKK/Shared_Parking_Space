@@ -1,12 +1,17 @@
 package com.dyf.common;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.dyf.bean.DBBean;
 import com.dyf.utils.SysoUtils;
 
 public class LoginServlet extends HttpServlet {
@@ -21,17 +26,48 @@ public class LoginServlet extends HttpServlet {
      * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
      */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		SysoUtils.print("用户名是："+username.toString());
-		SysoUtils.print("密码是："+password.toString());
+		SysoUtils.print("用户名是："+username);
+		SysoUtils.print("密码是："+password);
+		/*HttpSession session = request.getSession();
+		session.setAttribute("username", username);
+		String name = (String)session.getAttribute("username");
+		SysoUtils.print("登录的username是："+name);*/
 		if (username.equals("admin")&&password.equals("admin")) {
-			response.setHeader("refresh", "0;url=../Systemadmin/index.html");
+			HttpSession session = request.getSession();
+			session.setAttribute("username", username);
+			response.setHeader("refresh", "0;url=/Shared_Parking_Space/Systemadmin/index.html");
+			//response.sendRedirect("/Shared_Parking_Space/Systemadmin/index.html");
 		} else {
-			
+			DBBean db = new DBBean();
+			String selSql = "select parklotAdminName from table_parklotAdminInfo where parklotAdminLoginId="+"'"+username+"'"+" and parklotAdminLoginPass="+"'"+password+"'";
+			SysoUtils.print("selsql="+selSql);
+			ResultSet rs = db.executeQuery(selSql);
+			int flag = 0;
+			try {
+				while(rs.next()){
+					String name = rs.getString("parklotAdminName");
+					HttpSession session = request.getSession();
+					session.setAttribute("username", name);
+					flag = 1;
+					response.setHeader("refresh", "0;url=/Shared_Parking_Space/Parklotadmin/index.html");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(flag==0){
+				PrintWriter out = response.getWriter();
+				out.println("<script language='javaScript'> alert('用户名或密码错误,请重新登录!');</script>");
+				response.setHeader("refresh", "0;url=/Shared_Parking_Space/login.html");
+			}
 		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

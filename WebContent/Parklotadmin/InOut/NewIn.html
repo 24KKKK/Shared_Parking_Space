@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="GB18030">
-<title>ĞÂÔö½øÈëĞÅÏ¢</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>æ–°å¢è¿›å…¥ä¿¡æ¯</title>
+<link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-ĞÂÔö½øÈëĞÅÏ¢
+<body bgcolor="#ccd9ff">
+<br><br>
+
+<form class="form-horizontal" name="form_newInInfo"
+		action="../../AddInInfoDao" method="post">
+		<div class="form-group">
+			<label class="col-sm-2 control-label">è½¦ç‰Œå·</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_carid" name="carid"
+					placeholder="è¯·è¾“å…¥è½¦ç‰Œå·ï¼Œä¾‹å¦‚ï¼šå†€AR4305">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label">è½¦ä½å·</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control"
+					id="input_text_parkid" name="parkid"
+					placeholder="è¯·è¾“å…¥è½¦ä½å·ï¼Œä¾‹å¦‚ï¼š12">
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-8">
+				<button type="submit" class="btn btn-default btn-success"
+					name="submit_addininfo">ä¿å­˜</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="reset" class="btn btn-default btn-warning">é‡ç½®</button>
+			</div>
+		</div>
+	</form>
 </body>
 </html>

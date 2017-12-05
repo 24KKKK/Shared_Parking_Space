@@ -34,31 +34,30 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		SysoUtils.print("用户名是："+username);
 		SysoUtils.print("密码是："+password);
-		/*HttpSession session = request.getSession();
-		session.setAttribute("username", username);
-		String name = (String)session.getAttribute("username");
-		SysoUtils.print("登录的username是："+name);*/
+		
 		if (username.equals("admin")&&password.equals("admin")) {
-			HttpSession session = request.getSession();
-			session.setAttribute("username", username);
+			//HttpSession session = request.getSession();
+			//session.setAttribute("username", username);
 			response.setHeader("refresh", "0;url=/Shared_Parking_Space/Systemadmin/index.html");
-			//response.sendRedirect("/Shared_Parking_Space/Systemadmin/index.html");
 		} else {
 			DBBean db = new DBBean();
-			String selSql = "select parklotAdminName from table_parklotAdminInfo where parklotAdminLoginId="+"'"+username+"'"+" and parklotAdminLoginPass="+"'"+password+"'";
+			String selSql = "select parklotAdminId, parklotAdminName from table_parklotAdminInfo where parklotAdminLoginId="+"'"+username+"'"+" and parklotAdminLoginPass="+"'"+password+"'";
 			SysoUtils.print("selsql="+selSql);
 			ResultSet rs = db.executeQuery(selSql);
 			int flag = 0;
 			try {
 				while(rs.next()){
+					String adminId = rs.getString("parklotAdminId");
 					String name = rs.getString("parklotAdminName");
 					HttpSession session = request.getSession();
 					session.setAttribute("username", name);
+					session.setAttribute("userid", adminId);
 					flag = 1;
 					response.setHeader("refresh", "0;url=/Shared_Parking_Space/Parklotadmin/index.html");
 				}
+				rs.close();
+				db.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			if(flag==0){

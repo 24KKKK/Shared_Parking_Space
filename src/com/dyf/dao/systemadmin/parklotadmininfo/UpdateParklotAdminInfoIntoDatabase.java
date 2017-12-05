@@ -13,11 +13,11 @@ import com.dyf.bean.DBBean;
 import com.dyf.utils.CreateDate;
 import com.dyf.utils.SysoUtils;
 
-@WebServlet(description = "将修改过的停车场管理员信息放入数据库", urlPatterns = { "/UpdateIntoDatabase" })
-public class UpdateIntoDatabase extends HttpServlet {
+@WebServlet(description = "将修改过的停车场管理员信息放入数据库", urlPatterns = { "/UpdateParklotAdminInfoIntoDatabase" })
+public class UpdateParklotAdminInfoIntoDatabase extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public UpdateIntoDatabase() {
+	public UpdateParklotAdminInfoIntoDatabase() {
 		super();
 	}
 

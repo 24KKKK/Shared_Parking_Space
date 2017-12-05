@@ -30,6 +30,7 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		SysoUtils.print("进入QueryParklotAdminInfoDao.java");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");

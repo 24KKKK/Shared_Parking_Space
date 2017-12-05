@@ -53,7 +53,7 @@
 	<br>
 	<br>
 	<form class="form-horizontal" name="form_UpdateParklotAdminInfo"
-		action="UpdateIntoDatabase" method="post">
+		action="UpdateParklotAdminInfoIntoDatabase" method="post">
 		<div class="form-group">
 			<label class="col-sm-2 control-label">编号</label>
 			<div class="col-sm-5">

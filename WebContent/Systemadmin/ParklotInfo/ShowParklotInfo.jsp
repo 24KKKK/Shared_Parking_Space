@@ -55,7 +55,7 @@
 	<table name="table_listParklotInfo"
 		class="table table-striped table-hover">
 		<tr>
-			<th>名称</th>
+			<th>停车场名称</th>
 			<th>车位数量</th>
 			<th>地理精度</th>
 			<th>地理纬度</th>
@@ -135,7 +135,7 @@
 		</ul>
 	</div>
 	<!-- 分页结束 -->
-	<script src="/Shared_Parking_Space/js/index.js"></script>
+	<script src="/Shared_Parking_Space/js/My.js"></script>
 	<script src="/Shared_Parking_Space/bootstrap/js/jquery.1.9.1.min.js"></script>
 	<script src="/Shared_Parking_Space/bootstrap/js/bootstrap.min.js"></script>
 </body>

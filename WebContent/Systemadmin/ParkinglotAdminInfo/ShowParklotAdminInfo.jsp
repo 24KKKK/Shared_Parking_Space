@@ -55,7 +55,7 @@
 	<table name="table_listParklotAdminInfo"
 		class="table table-striped table-hover">
 		<tr>
-			<th>ID</th>
+			<th>管理员ID</th>
 			<th>电话</th>
 			<th>年龄</th>
 			<th>身份证号</th>

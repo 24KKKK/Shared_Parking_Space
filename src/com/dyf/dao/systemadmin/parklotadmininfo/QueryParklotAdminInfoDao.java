@@ -92,7 +92,6 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 				;
 				parklotAdminInfos.add(table_ParklotAdminInfo);
 			}
-			response.setCharacterEncoding("utf-8");
 			request.setAttribute("parklotAdminInfos", parklotAdminInfos);
 			request.getRequestDispatcher("/Systemadmin/ParkinglotAdminInfo/ShowParklotAdminInfo.jsp").forward(request,
 					response);

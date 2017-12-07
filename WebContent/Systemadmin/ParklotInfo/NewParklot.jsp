@@ -24,7 +24,7 @@
 			<label class="col-sm-2 control-label">名称</label>
 			<div class="col-sm-5">
 				<input type="text" class="form-control" id="input_text_parklotname"
-					name="parklotname" placeholder="请输入停车场名称，例如：光明停车场">
+					name="parklotname" autofocus placeholder="请输入停车场名称，例如：光明停车场">
 			</div>
 		</div>
 		<div class="form-group">

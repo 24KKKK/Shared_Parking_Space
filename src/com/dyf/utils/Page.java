@@ -33,10 +33,8 @@ public class Page {
 				SysoUtils.print("总页数：" + pageNum);
 			}
 		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally {
@@ -44,7 +42,6 @@ public class Page {
 				rs.close();
 				db.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

@@ -11,7 +11,6 @@ import java.util.Date;
 public class CreateDate {
 	//生成时间串，2017-08-02 10:35:09
 	/**
-	 * 
 	 * @return
 	 */
 	public static String getDate() {

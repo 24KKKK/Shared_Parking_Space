@@ -1,3 +1,4 @@
+<%@page import="com.dyf.utils.SysoUtils"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.dyf.bean.DBBean"%>
@@ -22,7 +23,9 @@
 				<select id="input_text_caridid" name="carid">
 					<%
 						DBBean db = new DBBean();
-						String selectSql = "select carid from table_inoutinfo group by indatetime desc";
+					String adminId = (String) session.getAttribute("userid");
+						String selectSql = "select carid from table_inoutinfo where parkadminid = '"+adminId+"' group by indatetime desc";
+						SysoUtils.print("查看"+adminId+"所在停车场可以出场的sql："+selectSql);
 						ResultSet rs = db.executeQuery(selectSql);
 						try {
 							while (rs.next()) {

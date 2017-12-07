@@ -15,6 +15,7 @@ public class Table_InOutInfo {
 	private String parklotname;		//停车场名字(外键)		盛世长安小区停车场
 	
 	/**
+	 * 全部参数
 	 * @param carid
 	 * @param indatetime
 	 * @param outdatetime
@@ -32,6 +33,25 @@ public class Table_InOutInfo {
 		this.parkadminid = parkadminid;
 		this.parklotname = parklotname;
 	}
+
+	/**
+	 * 不包含outdatetime，因为outdatetime中没有数据，在QueryInInfoDao中使用此构造方法
+	 * @param carid
+	 * @param indatetime
+	 * @param parkid
+	 * @param parkadminid
+	 * @param parklotname
+	 */
+	public Table_InOutInfo(String carid, String indatetime, int parkid, String parkadminid, String parklotname) {
+		super();
+		this.carid = carid;
+		this.indatetime = indatetime;
+		this.parkid = parkid;
+		this.parkadminid = parkadminid;
+		this.parklotname = parklotname;
+	}
+
+
 
 	public String getCarid() {
 		return carid;

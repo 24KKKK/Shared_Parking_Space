@@ -24,7 +24,7 @@ int parkid = InOutUtil.getParkNumber(adminId);
 			<label class="col-sm-2 control-label">车牌号</label>
 			<div class="col-sm-5">
 				<input type="text" class="form-control"
-					id="input_text_carid" name="carid" 
+					id="input_text_carid" name="carid" autofocus="autofocus"
 					placeholder="请输入车牌号，例如：冀AR4305">
 			</div>
 		</div>

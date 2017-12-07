@@ -25,6 +25,19 @@ public class SysoUtils {
 		}
 	}
 	
+	/**
+	 * 不换行的打印输出
+	 * @param args
+	 */
+	public static void p (Object...args){
+		if (DEBUG) {
+			for (Object arg:args){
+				System.out.print(arg);
+			}
+			System.out.print(" ");
+		}
+	}
+	
 	/*
 	 * 描述：或者如果只打印字符串类型，可以使用下面这个
 	private static final boolean DEBUG = false;

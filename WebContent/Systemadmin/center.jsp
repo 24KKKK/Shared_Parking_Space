@@ -24,7 +24,7 @@
 	</script>
 </head>
 <body>
-<%
+<%-- <%
 String username = (String)session.getAttribute("username");
 if(username==null){
 	out.print("<script type='text/javascript'> alert('请先登录');</script>");
@@ -34,8 +34,12 @@ if(username==null){
 	out.print(username);
 }
 
-%>
-<span id="now_time"></span>
+%> --%>
+<%-- <%
+String username = (String)session.getAttribute("username");
+out.print(username);
+%> --%>
+admin &nbsp;&nbsp;<span id="now_time"></span>
 	
 
 	<!-- <span id="sp_time"> </span>

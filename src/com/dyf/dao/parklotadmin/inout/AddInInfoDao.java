@@ -33,7 +33,7 @@ public class AddInInfoDao extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		String carid = request.getParameter("carid");
-		int inOrOut = 1;
+		//int inOrOut = 1;
 		String parkId = request.getParameter("parkid");
 		String inDatetime = CreateDate.getDate();
 		String parkAdminId = (String) session.getAttribute("userid");
@@ -46,8 +46,8 @@ public class AddInInfoDao extends HttpServlet {
 		SysoUtils.print("carid=" + carid + ",parkid=" + parkId + ",indatetime=" + inDatetime + ",parkAdminId="
 				+ parkAdminId + ",parklotName=" + parklotName);
 		
-		String insertSql = "insert into table_inoutinfo(carid,inorout,indatetime,parkid,parkadminid,parklotname) values ( "
-							+"'"+carid+"',"+inOrOut+",'"+inDatetime+"',"+parkId+",'"+parkAdminId+"',"+"'"+parklotName+"')";
+		String insertSql = "insert into table_inoutinfo(carid,indatetime,parkid,parkadminid,parklotname) values ( "
+							+"'"+carid+"','"+inDatetime+"',"+parkId+",'"+parkAdminId+"',"+"'"+parklotName+"')";
 		SysoUtils.print("insertSql="+insertSql);
 		
 		DBBean dbBean = new DBBean();
@@ -56,12 +56,12 @@ public class AddInInfoDao extends HttpServlet {
 			PrintWriter out = response.getWriter();
 			SysoUtils.print("添加入场信息成功。");
 			out.println("<script type='text/javascript'> alert('添加成功');</script>");
-			response.setHeader("refresh", "0;url=/Shared_Parking_Space/Parklotadmin/InOut/NewIn.html");
+			response.setHeader("refresh", "0;url=/Shared_Parking_Space/Parklotadmin/InOut/NewIn.jsp");
 		} else {
 			SysoUtils.print("添加入场信息失败。");
 			PrintWriter out = response.getWriter();
 			out.println("<script type='text/javascript'> alert('添加失败');</script>");
-			response.setHeader("refresh", "0;url=/Shared_Parking_Space/Parklotadmin/InOut/NewIn.html");
+			response.setHeader("refresh", "0;url=/Shared_Parking_Space/Parklotadmin/InOut/NewIn.jsp");
 		}
 		dbBean.close();
 		

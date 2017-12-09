@@ -6,11 +6,14 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {
 		
+		//int i = Page.getPageNum("table_inoutinfo", 5);
+		//SysoUtils.print("i:"+i);
+		
 		/*int k = InOutUtil.getParkAmount("测试停车场1");
 		SysoUtils.print("可以停车的车位号为："+ k );*/
 		
 		//InOutUtil.getArrParkId("测试停车场1");
-		InOutUtil.getParkNumber("测试停车场1");
+		//InOutUtil.getParkNumber("测试停车场1");
 		
 	}
 }

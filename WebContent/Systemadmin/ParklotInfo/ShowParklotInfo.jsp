@@ -120,8 +120,8 @@
 		<ul class="pagination pagination-lg">
 			<!-- <li><a href="#">上一页</a></li> -->
 			<%
-				if (ParklotInfoList.size() == 6) {
-					int pageNum = Page.getPageNum("table_Parklotinfo", 6);
+				/* if (ParklotInfoList.size() == 6) { */
+					int pageNum = Page.getPageNum("table_Parklotinfo", 6,request);
 					//int pageNum = Page.getPageNum(ParklotInfoList.size(), 6);
 					for (int i = 1; i <= pageNum; i++) {
 			%>
@@ -129,7 +129,7 @@
 				href="/Shared_Parking_Space/QueryParklotInfoDao?pagenum=<%=i%>"><%=i%></a></li>
 			<%
 				}
-				}
+				/* } */
 			%>
 			<!-- <li><a href="#">下一页</a></li> -->
 		</ul>

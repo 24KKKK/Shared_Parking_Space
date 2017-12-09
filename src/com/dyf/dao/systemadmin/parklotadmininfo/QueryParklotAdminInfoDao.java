@@ -93,6 +93,8 @@ public class QueryParklotAdminInfoDao extends HttpServlet {
 				parklotAdminInfos.add(table_ParklotAdminInfo);
 			}
 			request.setAttribute("parklotAdminInfos", parklotAdminInfos);
+			request.setAttribute("selectkey", selectKey);
+			request.setAttribute("selectValue", selectValue);
 			request.getRequestDispatcher("/Systemadmin/ParkinglotAdminInfo/ShowParklotAdminInfo.jsp").forward(request,
 					response);
 		} catch (SQLException e) {

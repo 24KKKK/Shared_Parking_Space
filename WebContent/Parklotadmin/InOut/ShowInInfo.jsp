@@ -13,7 +13,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=yes" />
-<title>显示停车场管理员信息</title>
+<title>显示场内车辆信息</title>
 <link href="/Shared_Parking_Space/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" media="screen">
 <link
@@ -68,6 +68,7 @@
 			if (obj instanceof List) {
 				table_InOutInfos = (List<Table_InOutInfo>) obj;
 			}
+			SysoUtils.print("showininfo.jsp的table_InOutInfos.size为：" + table_InOutInfos.size());
 			String carId = null;
 			String inDatetime = null;
 			int parkId = 0;
@@ -111,16 +112,16 @@
 		<ul class="pagination pagination-lg">
 			<!-- <li><a href="#">上一页</a></li> -->
 			<%
-				if (table_InOutInfos.size() == 6) {
-					int pageNum = Page.getPageNum("table_inoutinfo", 6);
+				/* if (table_InOutInfos.size() == 6) { */
+					int pageNum = Page.getPageNum("table_inoutinfo", 6,request);
 					//int pageNum = Page.getPageNum(parklotAdminInfoList.size(), 6);
 					for (int i = 1; i <= pageNum; i++) {
 			%>
-			<li><a
-				href="/Shared_Parking_Space/QueryInInfoDao?pagenum=<%=i%>"><%=i%></a></li>
+			<li><a href="/Shared_Parking_Space/QueryInInfoDao?pagenum=<%=i%>"><%=i%></a></li> 
+				 
 			<%
 				}
-				}
+				/* } */
 			%>
 			<!-- <li><a href="#">下一页</a></li> -->
 		</ul>
@@ -142,6 +143,13 @@
 		charset="UTF-8"></script>
 	<script src="/Shared_Parking_Space/js/My.js"></script>
 <script type="text/javascript">
+
+	<%-- function changePageNum(pageNum){
+		submitForm("<%=context %>/sublist/SublistServlet?pageNum=" + (currentPage-1));
+		submitForm("/Shared_Parking_Space/QueryInInfoDao?pagenum="+pageNum);
+		return true;
+	} --%>
+
 	function del(infoID) {
 		//alert("infoID="+infoID);
 		var a = confirm("确定删除吗？");

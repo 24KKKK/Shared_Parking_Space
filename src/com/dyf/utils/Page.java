@@ -3,6 +3,10 @@ package com.dyf.utils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.dyf.bean.DBBean;
 
 /**
@@ -10,19 +14,36 @@ import com.dyf.bean.DBBean;
  * @author diy
  *
  */
-public class Page {
+public class Page extends HttpServlet {
+	private static final long serialVersionUID = 1093424081610238304L;
+
 	/**
 	 * 描述：根据表名称，以及每页需要显示的数量，返回总页数
 	 * @param tableName 需要计算页数的表名String
 	 * @param showNumPerPage 每页显示的数量int
 	 * @return pageNum 总页数
 	 */
-	public static int getPageNum(String tableName, int showNumPerPage) {
+	public static int getPageNum(String tableName, int showNumPerPage, HttpServletRequest request) {
 		SysoUtils.print("tableName:" + tableName + ",showNumPerPage:" + showNumPerPage);
-		DBBean db = new DBBean();
+		
 		int pageNum = 0;  //总页数
-		String countNumSql = "select count(*) as countnum from " + tableName;
+		
+		String countNumSql = "select count(*) as countnum from " + tableName ;
+
+		//如果是车辆进出表，需要加一个wheresql
+		if(tableName.equals("table_inoutinfo")||tableName.equals("table_inoutinfobackup")){
+			
+			HttpSession session = request.getSession();
+			String adminId = (String) session.getAttribute("userid");
+			
+			String whereSql = " where parkadminid = '"+adminId+"'";
+			countNumSql+=whereSql;
+			SysoUtils.print("Page里面的countNumSql:"+countNumSql);
+		}
+		
+		
 		SysoUtils.print("countNumSql:"+countNumSql);
+		DBBean db = new DBBean();
 		ResultSet rs = db.executeQuery(countNumSql);
 		try {
 			while (rs.next()) {

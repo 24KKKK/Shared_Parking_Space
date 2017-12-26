@@ -37,11 +37,7 @@ public class AddBuyInfoDao extends HttpServlet {
 		HttpSession session = request.getSession();
 		String adminId = (String) session.getAttribute("userid");
 		String parklotName = "";
-		try {
-			parklotName = InOutUtil.getParklotName(adminId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		parklotName = InOutUtil.getParklotName(adminId);
 
 		String ownerName = request.getParameter("ownername");
 		String ownerPhone = request.getParameter("ownerphone");
@@ -92,6 +88,7 @@ public class AddBuyInfoDao extends HttpServlet {
 			out.println("<script type='text/javascript'> alert('添加购买信息失败');</script>");
 			response.setHeader("refresh", "0;url=/Shared_Parking_Space/Parklotadmin/Buy/NewBuyInfo.jsp");
 		}
+		dbBean.close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

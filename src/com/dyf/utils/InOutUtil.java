@@ -13,24 +13,34 @@ import com.dyf.bean.DBBean;
 public class InOutUtil {
 
 	// 根据传过来的停车场管理员id获得该管理员所在停车场的名称
-	public static String getParklotName(String id) throws SQLException {
+	public static String getParklotName(String id) {
 		SysoUtils.print("传入的停车场管理员id为：" + id);
 		String name = null;
 		DBBean dbBean = new DBBean();
 		String sql = "select parklotName from table_parklotInfo where parklotAdminId = " + "'" + id + "'";
 		SysoUtils.print("查询name的sql为：" + sql);
 		ResultSet rSet = dbBean.executeQuery(sql);
-		while (rSet.next()) {
-			name = rSet.getString("parklotName");
+		try {
+			while (rSet.next()) {
+				name = rSet.getString("parklotName");
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			try {
+				rSet.close();
+				dbBean.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		rSet.close();
-		dbBean.close();
+
 		SysoUtils.print("查询到的停车场名称为：" + name);
 		return name;
 	}
 
 	// 根据传过来的停车场管理员id获得该管理员所在停车场的车位总数量
-	public static int getParkAmount(String id) throws SQLException {
+	public static int getParkAmount(String id) {
 		SysoUtils.print("传入的停车场管理员id为：" + id);
 		int amount = 0; // 停车场管理员id所在停车场的车位总数量
 		DBBean dbBean = new DBBean();
@@ -38,12 +48,21 @@ public class InOutUtil {
 		SysoUtils.print("查询车位数量的amountSql为：" + amountSql);
 		ResultSet rSet = dbBean.executeQuery(amountSql);
 
-		while (rSet.next()) {
-			amount = rSet.getInt("parklotAmount");
-			SysoUtils.print("车位总数为：" + amount);
+		try {
+			while (rSet.next()) {
+				amount = rSet.getInt("parklotAmount");
+				SysoUtils.print("车位总数为：" + amount);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rSet.close();
+				dbBean.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		rSet.close();
-		dbBean.close();
 		SysoUtils.print("查询到的车位总数为：" + amount);
 		return amount;
 	}
@@ -77,7 +96,7 @@ public class InOutUtil {
 	// 根据传过来的停车场管理员id获得该管理员所在停车场的车位数量以及已经停车场的车位号，返回一个没有车辆的车位数
 	public static int getParkNumber(String id) throws SQLException {
 		SysoUtils.print("传入的停车场管理员id为：" + id);
-		boolean flag;  //作为进行从1开始进行车位号比较时的标记
+		boolean flag; // 作为进行从1开始进行车位号比较时的标记
 		int number = 0; // 返回的可以停车的车位号
 		int amount = getParkAmount(id); // 获得车位总数量
 		ArrayList<Integer> arrayList = new ArrayList<>();
@@ -96,7 +115,7 @@ public class InOutUtil {
 				break;
 			}
 		}
-		SysoUtils.print("找到的可以停车位号为："+number);
+		SysoUtils.print("找到的可以停车位号为：" + number);
 		return number;
 	}
 

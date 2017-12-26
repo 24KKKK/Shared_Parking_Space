@@ -38,11 +38,7 @@ public class AddInInfoDao extends HttpServlet {
 		String inDatetime = CreateDate.getDate();
 		String parkAdminId = (String) session.getAttribute("userid");
 		String parklotName = null;
-		try {
-			parklotName = InOutUtil.getParklotName(parkAdminId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		parklotName = InOutUtil.getParklotName(parkAdminId);
 		SysoUtils.print("carid=" + carid + ",parkid=" + parkId + ",indatetime=" + inDatetime + ",parkAdminId="
 				+ parkAdminId + ",parklotName=" + parklotName);
 		

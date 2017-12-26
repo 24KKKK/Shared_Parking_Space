@@ -49,13 +49,13 @@ public class QueryCanBuyInfoDao extends HttpServlet {
 		if ( selectValue2!=null && selectValue2!="" && selectValue3!=null &&selectValue3!="") {
 			selectValueInt2 = Integer.parseInt(selectValue2);
 			selectValueInt3 = Integer.parseInt(selectValue3);
-			SysoUtils.print("selectValueInt2:"+selectValueInt2+" selectValueInt3:"+selectValueInt3);
 		}
+		SysoUtils.print("selectValueInt2:"+selectValueInt2+" selectValueInt3:"+selectValueInt3);
 
-		String whereSql = null;
+		String whereSql = "";
 		// 判断第一个查询框的值，拼接查询sql
 		if (selectValue1 != null && selectValue1 != "") {
-			whereSql = " and parkid = " + selectValue1;
+			whereSql = " and buyparkid = " + selectValue1;
 		}
 
 		// 判断第二个查询框的值，拼接查询sql
@@ -79,7 +79,7 @@ public class QueryCanBuyInfoDao extends HttpServlet {
 		parklotAmount = InOutUtil.getParkAmount(adminId);
 
 		// 如果是查询停车场全部停车位的时间时
-		if (selectValue1 == null && selectValueInt2 == 25 && selectValueInt3 == 25) {
+		if ( (selectValue1==null||selectValue1=="") && selectValueInt2 == 25 && selectValueInt3 == 25) {
 			SysoUtils.print("进入第一个判断");
 			// 遍历停车场车位号，得出停车时间
 			for (int parkid = 1; parkid <= parklotAmount; parkid++) {
@@ -158,12 +158,11 @@ public class QueryCanBuyInfoDao extends HttpServlet {
 				canBuyInfos.add(canBuyInfo);
 
 			}
-		} else if (selectValue1 != null && selectValueInt2 == 25 && selectValueInt3 == 25) {
+		} else if (selectValue1 != null && selectValue1 != "" && selectValueInt2 == 25 && selectValueInt3 == 25) {
 			SysoUtils.print("进入第二个判断，查询指定停车位号：");
 			// 查询指定车位的时间
 			// 先获得数组的行数，也就是查询出的数据的行数
-			String countSql = "select count(*) as countrownum from table_buyinfo where parkadminid='" + adminId
-					+ "' and buyparkid=" + selectValue1;
+			String countSql = "select count(*) as countrownum from table_buyinfo where parkadminid='" + adminId+"' "+whereSql;
 			SysoUtils.print("第二个countSql:" + countSql);
 			DBBean dbBean = new DBBean();
 			ResultSet rSet = dbBean.executeQuery(countSql);
@@ -189,7 +188,7 @@ public class QueryCanBuyInfoDao extends HttpServlet {
 			if (countRowNum != 0) {
 				// 从数据库中查询车位号已经停车的时间，然后为数组赋值，
 				String selectSql = "select buyparkid,buystartparktime,buyendparktime from table_buyinfo where parkadminid='"
-						+ adminId + "' and buyparkid=" + selectValue1;
+						+ adminId + "' "+whereSql;
 				SysoUtils.print("selectSql:" + selectSql);
 
 				DBBean dbBean2 = new DBBean();
@@ -240,8 +239,7 @@ public class QueryCanBuyInfoDao extends HttpServlet {
 			// 遍历停车场车位号，得出停车时间
 			for (int parkid = 1; parkid <= parklotAmount; parkid++) {
 				// 先获得数组的行数，也就是查询出的数据的行数
-				String countSql = "select count(*) as countrownum from table_buyinfo where parkadminid='" + adminId
-						+ "' and buyparkid=" + parkid;
+				String countSql = "select count(*) as countrownum from table_buyinfo where parkadminid='" + adminId+ "' " + whereSql;
 				SysoUtils.print("第三个countSql:" + countSql);
 				DBBean dbBean = new DBBean();
 				ResultSet rSet = dbBean.executeQuery(countSql);
@@ -301,7 +299,7 @@ public class QueryCanBuyInfoDao extends HttpServlet {
 					// 可停车时间排序之后，进行条件查询，把选定停车时间之内的停车位显示出来
 					for (int b = 0; b < parkTimeArray.length; b++) {
 						flag = false;
-						if (selectValueInt2 == parkTimeArray[b][0] && selectValueInt3 == parkTimeArray[b][1]) {
+						if (selectValueInt2 >= parkTimeArray[b][0] && selectValueInt3 <= parkTimeArray[b][1]) {
 							flag = true;
 							break;
 						}

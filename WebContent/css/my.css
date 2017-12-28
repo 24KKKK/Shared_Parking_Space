@@ -1,0 +1,56 @@
+.tableinfo {
+	margin: 10px;
+	width: 98%;
+}
+
+td {
+	text-align: center;
+}
+
+.btn_print {
+	position:fixed;
+	width: 100%;
+	text-align: center;
+	bottom: 10px;
+}
+
+#btn_printinfo {
+	width: 150px;
+	height: 50px;
+	font-size: 15pt;
+}
+
+.print-title {
+	font-weight: bold;
+	font-size: 15pt;
+}
+
+.center_info{
+	width: 95%;
+	padding: 30px;	
+	font-size: 12pt;
+}
+
+.signature {
+	position:fixed;
+	height: 65px;
+	width: 100%;
+	text-align: right;
+	padding-right: 220px;
+	bottom: 140px;
+	font-size: 12pt;
+}
+
+.date {
+	position:fixed;
+	width: 100%;
+	text-align: right;
+	padding-right: 20px;
+	bottom: 75px;
+	font-size: 12pt;
+}
+
+
+
+
+

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery打印插件jqprint</title>
+<!-- <script language="javascript" src="jquery-1.4.4.min.js"></script> -->
+<!-- 
+如果您使用的是高版本jQuery调用下面jQuery迁移辅助插件即可
+<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+三个插件的顺序：
+	<script type="text/javascript"
+	src="/Shared_Parking_Space/bootstrap/js/jquery.1.9.1.min.js"></script>
+<script language="javascript"
+	src="/Shared_Parking_Space/js/jquery.jqprint-0.3.js"></script>
+<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+-->
+<script language="javascript" src="jquery.1.9.1.min.js"></script>
+<script language="javascript" src="jquery.jqprint-0.3.js"></script>
+<script src="http://www.jq22.com/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script language="javascript">
+	function aa() {
+		$("#ddd").jqprint();
+	}
+</script>
+</head>
+
+<body>
+	<div id="ddd">
+		<table>
+			<tr>
+				<td>test</td>
+			</tr>
+		</table>
+	</div>
+	<input type="button" onclick="aa()" value="打印" />
+</body>
+</html>

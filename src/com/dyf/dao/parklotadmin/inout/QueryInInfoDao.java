@@ -111,14 +111,12 @@ public class QueryInInfoDao extends HttpServlet {
 			request.setAttribute("inOutInfos", inOutInfos);
 			request.getRequestDispatcher("/Parklotadmin/InOut/ShowInInfo.jsp").forward(request, response);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
 				rSet.close();
 				dbBean.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

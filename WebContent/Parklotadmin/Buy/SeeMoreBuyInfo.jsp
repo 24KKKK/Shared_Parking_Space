@@ -37,6 +37,7 @@
 
 		String ownername = "";
 		int ownergender = 0;
+		String gender = "男";
 		String ownerphone = "";
 		int buyparkid = 0;
 		int buystartparktime = 25;
@@ -55,6 +56,9 @@
 			while (rSet.next()) {
 				ownername = rSet.getString("ownername");
 				ownergender = rSet.getInt("ownergender");
+				if(ownergender == 2){
+					gender = "女";
+				}
 				ownerphone = rSet.getString("ownerphone");
 				buyparkid = rSet.getInt("buyparkid");
 				buystartparktime = rSet.getInt("buystartparktime");
@@ -85,7 +89,7 @@
 					<td colspan="1">电话</td>
 					<td colspan="1"><%=ownerphone%></td>
 					<td colspan="1">性别</td>
-					<td colspan="1"><%=ownergender%></td>
+					<td colspan="1"><%=gender%></td>
 				</tr>
 				<tr>
 					<td colspan="1">身份证号</td>

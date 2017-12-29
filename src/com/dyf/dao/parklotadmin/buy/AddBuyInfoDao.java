@@ -69,9 +69,9 @@ public class AddBuyInfoDao extends HttpServlet {
 				+ buyCreatedTime + "');";
 		SysoUtils.print("insertBuySql:" + insertBuySql);
 
-		String insertOwnerSql = "INSERT INTO table_ownerinfo (parkadminid,parklotname,ownername,ownerphone,ownergender,owneridnumber,owneraddress) VALUES ('"
+		String insertOwnerSql = "INSERT INTO table_ownerinfo (parkadminid,parklotname,ownername,ownerphone,ownergender,owneridnumber,owneraddress,ownercreatedtime) VALUES ('"
 				+ adminId + "','" + parklotName + "','" + ownerName + "',	'" + ownerPhone + "'," + ownerGender + ",'"
-				+ ownerIdNumber + "','" + ownerAddress + "');";
+				+ ownerIdNumber + "','" + ownerAddress +"','"+ buyCreatedTime + "');";
 		SysoUtils.print("insertOwnerSql:" + insertOwnerSql);
 		
 		DBBean dbBean= new DBBean();

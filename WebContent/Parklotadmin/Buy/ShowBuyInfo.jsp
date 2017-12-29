@@ -1,7 +1,7 @@
 <%@page import="com.dyf.model.BuyInfo"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -14,37 +14,57 @@
 <link
 	href="/Shared_Parking_Space/bootstrap/css/bootstrap-datetimepicker.min.css"
 	rel="stylesheet" media="screen">
+<script type="text/javascript">
+//选择停车位号查询时，应该输入数字，要不然程序会报错
+	function checkNum() {
+		var re = /^[0-9]+.?[0-9]*$/; //判断字符串是否为数字 //判断正整数 /^[1-9]+[0-9]*]*$/ 
+		var selectkey = document.getElementById("selectkey1").value;
+		var selectvalue = document.getElementById("input_text_selectinfo").value;
+		if (selectkey == "parkid") {
+			if (!re.test(selectvalue)) {
+				alert("请输入数字");
+				document.getElementById("input_text_selectinfo").value = "";
+				document.getElementById("input_text_selectinfo").focus();
+				return false;
+			}
+		}
+	}
+	
+	//删除时的确定
+	function del(buycreatedtime) {
+		var a = confirm("确定删除吗？");
+		if (a == true) {
+			window.location.href = "/Shared_Parking_Space/DeleteBuyInfoDao?buycreatedtime="
+					+ buycreatedtime;
+		} else {
+		}
+	}
+</script>
 </head>
 <body>
 	<br>
 
 	<!-- 场内停车信息筛选条件 -->
 	<form class="form-inline"
-		action="/Shared_Parking_Space/QueryCanBuyInfoDao" method="post">
+		action="/Shared_Parking_Space/QueryBuyInfoDao" method="post">
 		&nbsp;&nbsp;&nbsp;&nbsp;
 
 		<div class="form-group">
-			<select class="form-control col-xs-4" name="selectkey1">
+			<select class="form-control col-xs-4" name="selectkey1"
+				id="selectkey1">
 				<option value="parkid">车位号</option>
+				<option value="ownername">姓名</option>
+				<option value="ownerphone">电话</option>
 			</select> <input type="text" class="form-control col-sm-1"
 				id="input_text_selectinfo" name="selectvalue1">
 		</div>
-		<button type="submit" class="btn btn-success">查询</button>
-
-		<div class="form-group form-inline">
-			<label class="control-label" name="selectkey2">&nbsp;&nbsp;&nbsp;时间段</label>
-			<input type="text" class="form-control" id="input_text_selectinfo"
-				name="selectvalue2">点至 <input type="text"
-				class="form-control" id="input_text_selectinfo" name="selectvalue3" >点
-		</div>
-		<button type="submit" class="btn btn-success">查询</button>
+		<button type="submit" onclick="checkNum();" class="btn btn-success">查询</button>
 	</form>
 	<!-- /场内停车信息筛选条件完成 -->
 	<br>
 
-	<!-- 显示场内车辆的基本信息 --> 
-	<table name="table_listBuyInfo"
-		class="table table-striped table-hover">
+	<!-- 显示场内车辆的基本信息 -->
+	<table name="table_listBuyInfo" class="table table-striped table-hover">
 		<tr>
 			<th>&nbsp;&nbsp;&nbsp;&nbsp;姓名</th>
 			<th>电话</th>
@@ -53,36 +73,35 @@
 			<th>日期</th>
 			<th>购买日期</th>
 			<th>管理员编号</th>
-			<th>停车场名称</th>
 			<th>查看详细</th>
-			<th>操作</th> 
+			<th>操作</th>
 		</tr>
 		<%
 			Object obj = request.getAttribute("buyinfos");
-		List<BuyInfo> buyInfos = null;
+			List<BuyInfo> buyInfos = null;
 			if (obj instanceof List) {
 				buyInfos = (List<BuyInfo>) obj;
 			}
 
-			 String ownername; // 购买者姓名
-	 String ownergender; // 性别
-	 String ownerphone; // 电话
-	 int buyparkid = 0; // 购买的车位号
-	 int buystartparktime = 25; // 停车的开始时间点
-	 int buyendparktime = 25; // 停车的结束时间点
-	 String buystartparkdate; // 开始停车日期
-	 String buyendparkdate; // 结束停车日期
-	 String owneridnumber; // 身份证号
-	 String owneraddress; // 购买者住址
-	 String parkadminid; // 管理员id编号
-	 String parklotname; // 停车场名称
-	 double buymoney = 0; // 购买停车位的应付金额
-	 String buycreatedtime; // 购买的创建时间
-			
+			String ownername; // 购买者姓名
+			String ownergender; // 性别
+			String ownerphone; // 电话
+			int buyparkid = 0; // 购买的车位号
+			int buystartparktime = 25; // 停车的开始时间点
+			int buyendparktime = 25; // 停车的结束时间点
+			String buystartparkdate; // 开始停车日期
+			String buyendparkdate; // 结束停车日期
+			String owneridnumber; // 身份证号
+			String owneraddress; // 购买者住址
+			String parkadminid; // 管理员id编号
+			String parklotname; // 停车场名称
+			double buymoney = 0; // 购买停车位的应付金额
+			String buycreatedtime; // 购买的创建时间
+
 			if (null != buyInfos && buyInfos.size() != 0) {
 				for (BuyInfo buyInfo : buyInfos) {
 					ownername = buyInfo.getOwnername();
-					ownergender=(1==buyInfo.getOwnergender())?"男":"女";
+					ownergender = (1 == buyInfo.getOwnergender()) ? "男" : "女";
 					ownerphone = buyInfo.getOwnerphone();
 					buyparkid = buyInfo.getBuyparkid();
 					buystartparktime = buyInfo.getBuystartparktime();
@@ -95,21 +114,20 @@
 					parklotname = buyInfo.getParklotname();
 					buymoney = buyInfo.getBuymoney();
 					buycreatedtime = buyInfo.getBuycreatedtime();
-					
 		%>
 		<tr>
 			<td>&nbsp;&nbsp;&nbsp;&nbsp;<%=ownername%></td>
 			<td><%=ownerphone%></td>
 			<td><%=buyparkid%></td>
-			<td><%=buystartparktime%>点-<%=buyendparktime %>点</td>
-			<td><%=buystartparkdate%>——<%=buyendparkdate %></td>
+			<td><%=buystartparktime%>点-<%=buyendparktime%>点</td>
+			<td><%=buystartparkdate%>——<%=buyendparkdate%></td>
 			<td><%=buycreatedtime%></td>
 			<td><%=parkadminid%></td>
-			<td><%=parklotname%></td>
-			<td><a href="/Shared_Parking_Space/Parklotadmin/Buy/SeeMoreBuyInfo.jsp?buycreatedtime=<%=buycreatedtime %>">查看详细</a></td>
-			<%-- <td><a class="btn btn-warning"
-				href="UpdateInInfoDao?carId=<%=carId%>">修改</a> <a
-				class="btn btn-danger" onclick="del('<%=carId%>')">删除</a></td> --%>
+			<td><a
+				href="/Shared_Parking_Space/Parklotadmin/Buy/SeeMoreBuyInfo.jsp?buycreatedtime=<%=buycreatedtime%>">查看详细</a></td>
+			<td><a class="btn btn-warning"
+				href="UpdateBuyInfoDao?buycreatedtime=<%=buycreatedtime%>">修改</a> <a
+				class="btn btn-danger" onclick="del('<%=buycreatedtime%>')">删除</a></td>
 		</tr>
 
 		<%

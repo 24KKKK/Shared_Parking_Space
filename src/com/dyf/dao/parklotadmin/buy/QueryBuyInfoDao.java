@@ -32,17 +32,53 @@ public class QueryBuyInfoDao extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
 
+		// 获取查询条件
+		String selectKey1 = request.getParameter("selectkey1");
+		String selectValue1 = request.getParameter("selectvalue1");
+		SysoUtils.print("selectkey1:" + selectKey1 + " selectvalue1:" + selectValue1);
+		// selectValue1.matches("\\d+");判断一个字符串能否转为数字，返回bool值
+		String whereSql = "";
+		// 判断第一个查询框的值，拼接查询sql
+		if (selectValue1 != null && selectValue1 != "") {
+			switch (selectKey1) {
+			case "parkid":
+				whereSql+=" and buyparkid = "+Integer.parseInt(selectValue1);
+				break;
+			case "ownername":
+				whereSql+=" and ownername LIKE '%" + selectValue1 + "%'";
+				break;
+			case "ownerphone":
+				whereSql+=" and ownerphone LIKE '%" + selectValue1 + "%'";
+				break;
+
+			default:
+				break;
+			}
+		}
+
 		HttpSession session = request.getSession();
 		String adminId = (String) session.getAttribute("adminid");
 		List<BuyInfo> buyInfos = new ArrayList<BuyInfo>();
 
-		String selectAllSql = "SELECT table_ownerinfo.ownername, table_ownerinfo.ownergender, table_ownerinfo.ownerphone, table_buyinfo.buyparkid, table_buyinfo.buystartparktime, table_buyinfo.buyendparktime, table_buyinfo.buystartparkdate, table_buyinfo.buyendparkdate, table_ownerinfo.owneridnumber, table_ownerinfo.owneraddress, table_buyinfo.parkadminid, table_buyinfo.parklotname, table_buyinfo.buymoney, table_buyinfo.buycreatedtime FROM table_buyinfo INNER JOIN table_ownerinfo ON table_buyinfo.buyidnumber = table_ownerinfo.owneridnumber where 1=1 ";
-		SysoUtils.print("查询全部购买信息selectAllSql:" + selectAllSql);
+		String selectAllSql = "SELECT table_ownerinfo.ownername, "
+				+ "table_ownerinfo.ownergender, table_ownerinfo.ownerphone, "
+				+ "table_buyinfo.buyparkid, table_buyinfo.buystartparktime,"
+				+ " table_buyinfo.buyendparktime, table_buyinfo.buystartparkdate,"
+				+ " table_buyinfo.buyendparkdate, table_ownerinfo.owneridnumber, "
+				+ "table_ownerinfo.owneraddress, table_buyinfo.parkadminid, "
+				+ "table_buyinfo.parklotname, table_buyinfo.buymoney, table_buyinfo.buycreatedtime"
+				+ " FROM table_buyinfo INNER JOIN table_ownerinfo ON "
+				+ "table_buyinfo.buyidnumber = table_ownerinfo.owneridnumber"
+				+ " where 1=1 "
+				+ whereSql;
+		SysoUtils.print("查询购买信息的selectAllSql:" + selectAllSql);
 
 		DBBean dbBean = new DBBean();
 		ResultSet rSet = dbBean.executeQuery(selectAllSql);
 		try {
+			int a = 0;
 			while (rSet.next()) {
+				a++;
 				String ownername = rSet.getString("ownername");
 				int ownergender = rSet.getInt("ownergender");
 				String ownerphone = rSet.getString("ownerphone");
@@ -63,10 +99,18 @@ public class QueryBuyInfoDao extends HttpServlet {
 						parklotname, buymoney, buycreatedtime);
 				buyInfos.add(buyInfo);
 			}
+			SysoUtils.print("querybuyinfo结果集循环次数："+a);
 			request.setAttribute("buyinfos", buyInfos);
 			request.getRequestDispatcher("/Parklotadmin/Buy/ShowBuyInfo.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				rSet.close();
+				dbBean.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}

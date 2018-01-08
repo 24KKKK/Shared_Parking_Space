@@ -92,18 +92,18 @@
 		<!-- 停车日期，开始到结束 -->
 		<div class="form-group form-inline">
 			<label class="col-sm-2 control-label">停车日期</label> &nbsp;&nbsp;&nbsp;
-			<input type="text" class="form-control form_buyparkdatetime"
+			<input type="text" class="form-control form-buyparkdatetime"
 				id="input_text_buystartparkdate" name="buystartparkdate"
 				readonly="readonly" onchange="countmoney()"> 号至 <input
-				type="text" class="form-control form_buyparkdatetime"
+				type="text" class="form-control form-buyparkdatetime"
 				id="input_text_buyendparkdate" name="buyendparkdate"
 				readonly="readonly" onchange="countmoney()">号
 		</div>
 
 		<div class="form-group form-inline">
 			<label class="col-sm-2 control-label">应付金额</label> &nbsp;&nbsp;&nbsp;
-			<input type="text" class="form-control"
-				id="input_text_buymoney" name="buymoney" readonly="readonly">元
+			<input type="text" class="form-control" id="input_text_buymoney"
+				name="buymoney" readonly="readonly">元
 		</div>
 
 		<div class="form-group">
@@ -117,19 +117,15 @@
 	</form>
 
 	<script type="text/javascript"
-		src="/Shared_Parking_Space/bootstrap/js/jquery.1.9.1.min.js"
-		charset="UTF-8"></script>
+		src="/Shared_Parking_Space/bootstrap/js/jquery.1.9.1.min.js"></script>
 	<script type="text/javascript"
 		src="/Shared_Parking_Space/bootstrap/js/bootstrap.min.js"></script>
 	<script type="text/javascript"
-		src="/Shared_Parking_Space/bootstrap/js/bootstrap-datetimepicker.js"
-		charset="UTF-8"></script>
+		src="/Shared_Parking_Space/bootstrap/js/bootstrap-datetimepicker.js"></script>
 	<script type="text/javascript"
-		src="/Shared_Parking_Space/bootstrap/js/locales/bootstrap-datetimepicker.fr.js"
-		charset="UTF-8"></script>
+		src="/Shared_Parking_Space/bootstrap/js/locales/bootstrap-datetimepicker.fr.js"></script>
 	<script type="text/javascript"
-		src="/Shared_Parking_Space/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js"
-		charset="UTF-8"></script>
+		src="/Shared_Parking_Space/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script src="/Shared_Parking_Space/js/My.js"></script>
 
 </body>

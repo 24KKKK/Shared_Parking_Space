@@ -1,3 +1,4 @@
+<%@page import="com.dyf.model.Table_BuyInfoBackup"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.dyf.bean.DBBean"%>
@@ -27,13 +28,13 @@
 		response.setContentType("text/html; charset=UTF-8");
 
 		String buyCreatedTime = request.getParameter("buycreatedtime");
-		HttpSession session2 = request.getSession();
+		/* HttpSession session = request.getSession(); */
 		String adminId = (String) session.getAttribute("userid");
-		List<BuyInfo> buyInfos = new ArrayList<BuyInfo>();
+		String adminName = (String)  session.getAttribute("username");
+		List<Table_BuyInfoBackup> table_BuyInfoBackups = new ArrayList<Table_BuyInfoBackup>();
 
-		String selectAllSql = "SELECT table_ownerinfo.ownername, table_ownerinfo.ownergender, table_ownerinfo.ownerphone, table_buyinfo.buyparkid, table_buyinfo.buystartparktime, table_buyinfo.buyendparktime, table_buyinfo.buystartparkdate, table_buyinfo.buyendparkdate, table_ownerinfo.owneridnumber, table_ownerinfo.owneraddress, table_buyinfo.parkadminid, table_buyinfo.parklotname, table_buyinfo.buymoney, table_buyinfo.buycreatedtime FROM table_buyinfo INNER JOIN table_ownerinfo ON table_buyinfo.buyidnumber = table_ownerinfo.owneridnumber where 1=1 and table_buyinfo.buycreatedtime = '"
-				+ buyCreatedTime + "' ";
-		SysoUtils.print("SeeMoreBuyInfo.jsp的查询全部购买信息selectAllSql:" + selectAllSql);
+		String selectAllSql = "select parklotname,ownername,ownerphone,ownergender,owneridnumber,owneraddress,buyparkid,buystartparktime,buyendparktime,buystartparkdate,buyendparkdate,buymoney,buycreatedtime,deletetime from table_buyinfobackup where parkadminid = '"+adminId+"' and buycreatedtime = '"+buyCreatedTime+"'";
+		SysoUtils.print("SeeMoreBackUpBuyInfo.jsp的查询全部购买信息selectAllSql:" + selectAllSql);
 
 		String ownername = "";
 		int ownergender = 0;
@@ -54,6 +55,7 @@
 		ResultSet rSet = dbBean.executeQuery(selectAllSql);
 		try {
 			while (rSet.next()) {
+				parklotname = rSet.getString("parklotname");
 				ownername = rSet.getString("ownername");
 				ownergender = rSet.getInt("ownergender");
 				if(ownergender == 2){
@@ -67,13 +69,15 @@
 				buyendparkdate = rSet.getString("buyendparkdate");
 				owneridnumber = rSet.getString("owneridnumber");
 				owneraddress = rSet.getString("owneraddress");
-				parkadminid = rSet.getString("parkadminid");
 				parklotname = rSet.getString("parklotname");
 				buymoney = rSet.getDouble("buymoney");
 				buycreatedtime = rSet.getString("buycreatedtime");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			rSet.close();
+			dbBean.close();
 		}
 	%>
 
@@ -81,7 +85,7 @@
 		<div class="tableinfo">
 			<table class="table table-bordered">
 				<tr>
-					<td colspan="6" class="print-title">停车位购买协议</td>
+					<td colspan="6" class="print-title">停车位购买信息</td>
 				</tr>
 				<tr>
 					<td colspan="1">姓名</td>
@@ -111,7 +115,7 @@
 				</tr>
 				<tr>
 					<td colspan="1">管理员编号</td>
-					<td colspan="1"><%=parkadminid%></td>
+					<td colspan="1"><%=adminId%></td>
 					<td colspan="1">停车场名称</td>
 					<td colspan="1"><%=parklotname%></td>
 					<td colspan="1">应付金额</td>
@@ -124,19 +128,33 @@
 			<p>这是中间的协议内容。。。</p>
 		</div>
 		
-		<div class="signature">
-			<p>停车场负责人:</p><br>
-			<p>购买人:</p><br>
+			<table class="table-signature">
+				<tr>
+					<td class="signaturebackup1">停车场负责人:&nbsp;&nbsp;</td>
+					<td class="signaturebackup2"><%=adminName%></td>
+				</tr>
+				<tr>
+					<td class="signaturebackup1">停车位购买人:&nbsp;&nbsp;</td>
+					<td class="signaturebackup2"><%=ownername%></td>
+				</tr>
+				<tr>
+					<td class="signaturebackup1" >车位购买时间:&nbsp;&nbsp;</td>
+					<td class="signaturebackup2"><%=buycreatedtime%></td>
+				</tr>
+			</table>
+		
+		<%-- <div class="signature">
+			<p>停车场负责人:&nbsp;&nbsp;<%=adminName %></p><br>
+			<p>购买人:&nbsp;&nbsp;<%=ownername %></p><br>
 		</div>
 		
 		<div class="date">
 			<p>日期：
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;年
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;月
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</p>
-		</div>
+			&nbsp;&nbsp;&nbsp;&nbsp;<%=buycreatedtime.substring(0,4) %>年
+			&nbsp;&nbsp;<%=buycreatedtime.substring(5,7) %>月
+			&nbsp;&nbsp;<%=buycreatedtime.substring(8,10) %>日</p>
+		</div> --%>
 		
-
 	</div>
 
 	<div class="btn_print">

@@ -50,8 +50,8 @@ public class DeleteBuyInfoDao extends HttpServlet {
 		String owneridnumber = "";
 		String owneraddress = "";
 		int buyparkid = 0;
-		String buystartparktime = "";
-		String buyendparktime = "";
+		int buystartparktime=0;
+		int buyendparktime = 0;
 		String buystartparkdate = "";
 		String buyendparkdate = "";
 		double buymoney = 0.0;
@@ -67,8 +67,8 @@ public class DeleteBuyInfoDao extends HttpServlet {
 				owneridnumber = rSet.getString("owneridnumber");
 				owneraddress = rSet.getString("owneraddress");
 				buyparkid = Integer.parseInt(rSet.getString("buyparkid"));
-				buystartparktime = rSet.getString("buystartparktime");
-				buyendparktime = rSet.getString("buyendparktime");
+				buystartparktime = rSet.getInt("buystartparktime");
+				buyendparktime = rSet.getInt("buyendparktime");
 				buystartparkdate = rSet.getString("buystartparkdate");
 				buyendparkdate = rSet.getString("buyendparkdate");
 				buymoney = Double.parseDouble(rSet.getString("buymoney"));

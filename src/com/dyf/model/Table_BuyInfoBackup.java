@@ -10,8 +10,8 @@ public class Table_BuyInfoBackup {
 	private String owneridnumber;// 购买者身份证号
 	private String owneraddress;// 购买者住址
 	private int buyparkid = 0;// 购买的车位号
-	private String buystartparktime;// 开始停车时间
-	private String buyendparktime;// 结束停车时间
+	private int buystartparktime;// 开始停车时间
+	private int buyendparktime;// 结束停车时间
 	private String buystartparkdate;// 开始停车日期
 	private String buyendparkdate;// 结束停车日期
 	private double buymoney = 0.0;// 应付金额
@@ -46,8 +46,8 @@ public class Table_BuyInfoBackup {
 	 * @param deleteTime
 	 */
 	public Table_BuyInfoBackup(String parkAdminId, String parklotName, String ownername, String ownerphone,
-			int ownergender, String owneridnumber, String owneraddress, int buyparkid, String buystartparktime,
-			String buyendparktime, String buystartparkdate, String buyendparkdate, double buymoney,
+			int ownergender, String owneridnumber, String owneraddress, int buyparkid, int buystartparktime,
+			int buyendparktime, String buystartparkdate, String buyendparkdate, double buymoney,
 			String buyCreatedTime, String deleteTime) {
 		super();
 		this.parkAdminId = parkAdminId;
@@ -131,19 +131,19 @@ public class Table_BuyInfoBackup {
 		this.buyparkid = buyparkid;
 	}
 
-	public String getBuystartparktime() {
+	public int getBuystartparktime() {
 		return buystartparktime;
 	}
 
-	public void setBuystartparktime(String buystartparktime) {
+	public void setBuystartparktime(int buystartparktime) {
 		this.buystartparktime = buystartparktime;
 	}
 
-	public String getBuyendparktime() {
+	public int getBuyendparktime() {
 		return buyendparktime;
 	}
 
-	public void setBuyendparktime(String buyendparktime) {
+	public void setBuyendparktime(int buyendparktime) {
 		this.buyendparktime = buyendparktime;
 	}
 

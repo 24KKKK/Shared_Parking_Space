@@ -15,19 +15,21 @@ import javax.servlet.http.HttpSession;
 
 import com.dyf.bean.DBBean;
 import com.dyf.model.BuyInfo;
+import com.dyf.model.Table_BuyInfoBackup;
+import com.dyf.utils.InOutUtil;
 import com.dyf.utils.SysoUtils;
 
-@WebServlet(description = "查看车位已经购买的信息", urlPatterns = { "/QueryBuyInfoDao" })
-public class QueryBuyInfoDao extends HttpServlet {
+@WebServlet(description = "查看车位历史购买的信息", urlPatterns = { "/QueryBackUpBuyInfoDao" })
+public class QueryBackUpBuyInfoDao extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public QueryBuyInfoDao() {
+	public QueryBackUpBuyInfoDao() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		SysoUtils.print("进入QueryBuyInfoDao.java");
+		SysoUtils.print("进入QueryBackUpBuyInfoDao.java");
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -58,20 +60,11 @@ public class QueryBuyInfoDao extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String adminId = (String) session.getAttribute("userid");
-		List<BuyInfo> buyInfos = new ArrayList<BuyInfo>();
+		String parklotName = InOutUtil.getParklotName(adminId);
+		List<Table_BuyInfoBackup> table_BuyInfoBackups = new ArrayList<Table_BuyInfoBackup>();
 
-		String selectAllSql = "SELECT table_ownerinfo.ownername, "
-				+ "table_ownerinfo.ownergender, table_ownerinfo.ownerphone, "
-				+ "table_buyinfo.buyparkid, table_buyinfo.buystartparktime,"
-				+ " table_buyinfo.buyendparktime, table_buyinfo.buystartparkdate,"
-				+ " table_buyinfo.buyendparkdate, table_ownerinfo.owneridnumber, "
-				+ "table_ownerinfo.owneraddress, table_buyinfo.parkadminid, "
-				+ "table_buyinfo.parklotname, table_buyinfo.buymoney, table_buyinfo.buycreatedtime"
-				+ " FROM table_buyinfo INNER JOIN table_ownerinfo ON "
-				+ "table_buyinfo.buyidnumber = table_ownerinfo.owneridnumber"
-				+ " where 1=1 "
-				+ whereSql;
-		SysoUtils.print("查询购买信息的selectAllSql:" + selectAllSql);
+		String selectAllSql = "select ownername,ownerphone,ownergender,owneridnumber,owneraddress,buyparkid,buystartparktime,buyendparktime,buystartparkdate,buyendparkdate,buymoney,buycreatedtime,deletetime from table_buyinfobackup where parkadminid = '"+adminId+"'"+ whereSql;
+		SysoUtils.print("查询历史购买信息的selectAllSql:" + selectAllSql);
 
 		DBBean dbBean = new DBBean();
 		ResultSet rSet = dbBean.executeQuery(selectAllSql);
@@ -82,26 +75,23 @@ public class QueryBuyInfoDao extends HttpServlet {
 				String ownername = rSet.getString("ownername");
 				int ownergender = rSet.getInt("ownergender");
 				String ownerphone = rSet.getString("ownerphone");
+				String owneridnumber = rSet.getString("owneridnumber");
+				String owneraddress = rSet.getString("owneraddress");
 				int buyparkid = rSet.getInt("buyparkid");
 				int buystartparktime = rSet.getInt("buystartparktime");
 				int buyendparktime = rSet.getInt("buyendparktime");
 				String buystartparkdate = rSet.getString("buystartparkdate");
 				String buyendparkdate = rSet.getString("buyendparkdate");
-				String owneridnumber = rSet.getString("owneridnumber");
-				String owneraddress = rSet.getString("owneraddress");
-				String parkadminid = rSet.getString("parkadminid");
-				String parklotname = rSet.getString("parklotname");
 				double buymoney = rSet.getDouble("buymoney");
 				String buycreatedtime = rSet.getString("buycreatedtime");
+				String deletetime = rSet.getString("deletetime");
 
-				BuyInfo buyInfo = new BuyInfo(ownername, ownergender, ownerphone, buyparkid, buystartparktime,
-						buyendparktime, buystartparkdate, buyendparkdate, owneridnumber, owneraddress, parkadminid,
-						parklotname, buymoney, buycreatedtime);
-				buyInfos.add(buyInfo);
+				Table_BuyInfoBackup table_BuyInfoBackup = new Table_BuyInfoBackup(adminId, parklotName, ownername, ownerphone, ownergender, owneridnumber, owneraddress, buyparkid, buystartparktime, buyendparktime, buystartparkdate, buyendparkdate, buymoney, buycreatedtime, deletetime);
+				table_BuyInfoBackups.add(table_BuyInfoBackup);
 			}
 			SysoUtils.print("querybuyinfo结果集循环次数："+a);
-			request.setAttribute("buyinfos", buyInfos);
-			request.getRequestDispatcher("/Parklotadmin/Buy/ShowBuyInfo.jsp").forward(request, response);
+			request.setAttribute("table_BuyInfoBackups", table_BuyInfoBackups);
+			request.getRequestDispatcher("/Parklotadmin/Buy/ShowBackUpBuyInfo.jsp").forward(request, response);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

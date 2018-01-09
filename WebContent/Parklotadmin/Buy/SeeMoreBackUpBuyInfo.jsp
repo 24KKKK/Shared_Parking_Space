@@ -124,9 +124,9 @@
 			</table>
 		</div>
 
-		<div class="center_info">
+		<!-- <div class="center_info">
 			<p>这是中间的协议内容。。。</p>
-		</div>
+		</div> -->
 		
 			<table class="table-signature">
 				<tr>
@@ -142,19 +142,6 @@
 					<td class="signaturebackup2"><%=buycreatedtime%></td>
 				</tr>
 			</table>
-		
-		<%-- <div class="signature">
-			<p>停车场负责人:&nbsp;&nbsp;<%=adminName %></p><br>
-			<p>购买人:&nbsp;&nbsp;<%=ownername %></p><br>
-		</div>
-		
-		<div class="date">
-			<p>日期：
-			&nbsp;&nbsp;&nbsp;&nbsp;<%=buycreatedtime.substring(0,4) %>年
-			&nbsp;&nbsp;<%=buycreatedtime.substring(5,7) %>月
-			&nbsp;&nbsp;<%=buycreatedtime.substring(8,10) %>日</p>
-		</div> --%>
-		
 	</div>
 
 	<div class="btn_print">

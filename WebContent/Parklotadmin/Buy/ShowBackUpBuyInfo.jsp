@@ -47,7 +47,7 @@
 
 	<!-- 场内停车信息筛选条件 -->
 	<form class="form-inline"
-		action="/Shared_Parking_Space/QueryBuyInfoDao" method="post">
+		action="/Shared_Parking_Space/QueryBackUpBuyInfoDao" method="post">
 		&nbsp;&nbsp;&nbsp;&nbsp;
 
 		<div class="form-group">

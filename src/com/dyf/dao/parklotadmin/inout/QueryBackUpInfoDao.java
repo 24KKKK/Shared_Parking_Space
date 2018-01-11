@@ -52,7 +52,7 @@ public class QueryBackUpInfoDao extends HttpServlet {
 		SysoUtils.print("selectkey2:" + selectKey2 + " selectvalue2:" + selectValue2);
 		String whereSql = null;
 		// 判断第一个查询框的值，拼接查询sql
-		/*if (selectKey1 != null && selectValue1 != null && selectValue1 != "") {
+		if (selectKey1 != null && selectValue1 != null && selectValue1 != "") {
 			switch (selectKey1) {
 			case "carid":
 				whereSql = " and carid LIKE '%" + selectValue1 + "%'";
@@ -63,10 +63,10 @@ public class QueryBackUpInfoDao extends HttpServlet {
 			default:
 				break;
 			}
-		}*/
+		}
 
 		// 判断第二个查询框的值，拼接查询sql
-		/*if (selectKey2 != null && selectValue2 != null && selectValue2 != "") {
+		if (selectKey2 != null && selectValue2 != null && selectValue2 != "") {
 			switch (selectKey2) {
 			case "startindatetime":
 				whereSql = " and indatetime between '" + selectValue2 + "' and '" + CreateDate.getDate() + "'";
@@ -79,7 +79,7 @@ public class QueryBackUpInfoDao extends HttpServlet {
 			default:
 				break;
 			}
-		}*/
+		}
 
 		// 查询场内车辆历史信息
 		List<Table_InOutInfoBackup> inOutInfoBackups = new ArrayList<Table_InOutInfoBackup>();

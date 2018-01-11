@@ -69,7 +69,7 @@ public class QueryBuyInfoDao extends HttpServlet {
 				+ "table_buyinfo.parklotname, table_buyinfo.buymoney, table_buyinfo.buycreatedtime"
 				+ " FROM table_buyinfo INNER JOIN table_ownerinfo ON "
 				+ "table_buyinfo.buyidnumber = table_ownerinfo.owneridnumber"
-				+ " where 1=1 "
+				+ " WHERE table_buyinfo.parkadminid = '"+adminId+"' and 1 = 1 "
 				+ whereSql;
 		SysoUtils.print("查询购买信息的selectAllSql:" + selectAllSql);
 

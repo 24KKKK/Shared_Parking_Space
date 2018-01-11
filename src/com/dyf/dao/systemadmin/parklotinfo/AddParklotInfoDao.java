@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.dyf.bean.DBBean;
 import com.dyf.utils.CreateDate;
+import com.dyf.utils.LocationUtil;
 import com.dyf.utils.SysoUtils;
 
 /**
@@ -38,13 +39,17 @@ public class AddParklotInfoDao extends HttpServlet {
 		String parklotDescription = request.getParameter("parklotdescription");
 		String parklotAdminId = request.getParameter("parklotadminid");
 		String parklotCreatedTime = CreateDate.getDate();
+		
+		//停车场的省市区信息
+		String[] arr = LocationUtil.getLocation(parklotLng, parklotLat);
+		
 		SysoUtils.print("新增的停车场信息：");
 		SysoUtils.print(parklotName + " " + parklotAmount + " " + parklotLng + " " + parklotLat + " "
-				+ parklotDescription + " " + parklotAdminId + " " + parklotCreatedTime);
+				+ parklotDescription + " " + parklotAdminId + " " + parklotCreatedTime+" "+arr[0]+" "+arr[1]+" "+arr[2]);
 
-		String insertSql = "insert into table_parklotinfo (parklotName,parklotAmount,parklotLng,parklotLat,parklotDescription,parklotAdminId,parklotCreatedTime) values('"
+		String insertSql = "insert into table_parklotinfo (parklotName,parklotAmount,parklotLng,parklotLat,parklotDescription,parklotAdminId,parklotCreatedTime,parklotProvince,parklotCity,parklotArea) values('"
 				+ parklotName + "'," + parklotAmount + ",'" + parklotLng + "','" + parklotLat + "','"
-				+ parklotDescription + "','" + parklotAdminId + "','" + parklotCreatedTime + "')";
+				+ parklotDescription + "','" + parklotAdminId + "','" + parklotCreatedTime + "','"+arr[0]+"','"+arr[1]+"','"+arr[2]+"')";
 		SysoUtils.print("insertSql=" + insertSql);
 
 		DBBean db = new DBBean();

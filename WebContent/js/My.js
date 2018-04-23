@@ -168,6 +168,26 @@ $(".form-updateparkdatetime").datetimepicker({
  */
 });
 
+/**
+ * 统计查询中的日期选择，只选择日期
+ */
+$(".form-statisdate").datetimepicker({
+	language : 'zh-CN',
+	format : 'yyyy-mm-dd',
+	autoclose : true,
+	todayBtn : true,
+	startDate : '2017-01-01',
+	// endDate: new Date(), //当前时间之后的时间不能选择，这句可以使用
+	startView : 2,
+	maxView : 4, // 最高能按照年份选择时间
+	minView : 3, // 日期时间选择器所能够提供的最精确的时间选择视图。选择日期
+	todayHighlight : true,
+/*
+ * linkField: "mirror_field", linkFormat: "yyyy-mm-dd hh:ii:00"
+ */
+});
+
+
 function ale(arg) {
 	var DEBUG = true;
 	if (DEBUG) {

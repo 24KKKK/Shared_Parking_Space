@@ -17,6 +17,14 @@
 <script type="text/javascript"
 	src="/Shared_Parking_Space/bootstrap/js/jquery.1.9.1.min.js"></script>
 
+<style type="text/css">
+#main {
+	width: 800px;
+	height: 450px;
+	margin-top: 20px;
+	margin-left: 20px
+}
+</style>
 
 </head>
 <body>
@@ -30,111 +38,115 @@
 		</div>
 	</div> -->
 
-	<div id="main" style="width: 800px; height: 450px"></div>
+	<div id="main"></div>
 
 	<script type="text/javascript">
 		// 初始化echarts实例
 		var myChart = echarts.init(document.getElementById('main'));
 		// 指定图表的配置项和数据
 		var option = {
-			// 图表名称
 			title : {
-				text : '停车时长分布'
+				text : '停车时长分布',
+				x : 'center'
 			},
-			// 工具栏
-			tooltip : {},
-
-			// 图例
+			tooltip : {
+				trigger : 'item',
+				formatter : "{a} <br/>{b} : {c} ({d}%)"
+			},
 			legend : {
-				date : [ '销量' ]
+				orient : 'vertical',
+				left : 'left',
+				data : [ '15分钟以内', '15-30分钟', '30分钟-1小时', '1-2小时', '2-4小时',
+						'4-8小时', '8小时-1天', '1天以上' ]
 			},
-			// X轴
-			xAxis :{
-				//data : [ "衬衫", "羊毛", "雪纺衫", "裤子", "高跟鞋", "袜子" ],
-				data:[],
-				name:'时刻'
-			},
-			// Y轴
-			yAxis : {
-				name:'车辆数'
-			},
-			// 数据
-			series : [ {
-				name : '销量',
-				type : 'bar',
-				//data : [ 5, 20, 36, 10, 10, 20 ],
-				data:[],
-				label: {
-	                normal: {
-	                    show: true,
-	                    position: 'top'
-	                }
-	            },
-				markPoint : {
-					data : [ {
-						name : '最大值',
-						type : 'max'
-					}, {
-						name : '最小值',
-						type : 'min'
-					} ]
+			series : {
+				name : '停车时长',
+				type : 'pie',
+				radius : '80%',
+				center : [ '50%', '55%' ],
+				data : [ {
+					value : 1,
+					name : '15分钟以内'
+				} , {
+					value : 1,
+					name : '15-30分钟'
+				}, {
+					value : 1,
+					name : '30分钟-1小时'
+				}, {
+					value : 1,
+					name : '1-2小时'
+				}, {
+					value : 1,
+					name : '2-4小时'
+				}, {
+					value : 1,
+					name : '4-8小时'
+				}, {
+					value : 1,
+					name : '8小时-1天'
+				}, {
+					value : 1,
+					name : '1天以上'
+				}  ],
+				label : {
+					show : true,
+					position : 'top',
+					formatter : "{b}\n {d}%"
+				},
+				itemStyle : {
+					emphasis : {
+						shadowBlur : 10,
+						shadowOffsetX : 0,
+						shadowColor : 'rgba(0, 0, 0, 0.5)'
+					}
 				}
-			} ],
+			},
 			toolbox : {
 				show : true,
 				feature : {
 					saveAsImage : {
-						type : 'png',
-						show : true,
-						title : '保存为图片'
-					},
-					dataZoom : {
 						show : true
 					},
-					magicType : {
+					dataView : {
 						show : true,
-						type : [ 'line', 'bar' ]
-					}
+						readOnly : true
+					},
+					restore : {
+						show : true
+					},
+
 				}
-			}
+			},
 		};
 
 		// 使用刚指定的配置项和数据显示图表
 		myChart.setOption(option);
 	</script>
-	
+
 	<script type="text/javascript">
 		$(function() {
-			$("#qry_carinbydate").click(function() {
-				var option = myChart.getOption();
-				$.ajax({
-					type : "post",
-					async : false,
-					url : "/Shared_Parking_Space/ShowCarInTime",
-					datatype : "json",
-					data : {
-						/* parkdate:$("#parkdate").val() */
-						parkdate : "2017-12-05"
-					},
-					success : function(result) {
-						alert("请求正确");
-						var x = new Array();
-						var y = new Array();
-						for (var i = 0; i < result.data.length; i++) {
-							x[i] = result.data[i].time;
-							y[i] = result.data[i].num;
-						}
-						option.xAxis[0].data = x;
-						option.series[0].data = y;
-						//alert(option.xAxis.data.toString());
-						myChart.setOption(option);
-					},
-					error : function() {
-						alert("请求错误");
+			var option = myChart.getOption();
+			$.ajax({
+				type : "post",
+				async : false,
+				url : "/Shared_Parking_Space/ShowCarParkDuration",
+				datatype : "json",
+				success : function(result) {
+					alert("请求正确");
+					var leg = new Array('15分钟以内', '15-30分钟', '30分钟-1小时',
+							'1-2小时', '2-4小时', '4-8小时', '8小时-1天', '1天以上');
+					for (var i = 0; i < result.data.length; i++) {
+						option.series[0].data[i].value = result.data[i].num;
+						option.series[0].data[i].name = leg[i];
 					}
-				});
-				return false;
+					myChart.setOption(option);
+				},
+				error : function() {
+					alert("请求错误");
+				}
 			});
+			return false;
 		});
 	</script>
 

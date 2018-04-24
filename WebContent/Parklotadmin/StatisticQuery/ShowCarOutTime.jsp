@@ -46,7 +46,7 @@
 
 			// 图例
 			legend : {
-				date : [ '销量' ]
+				date : [ '车辆数' ]
 			},
 			// X轴
 			xAxis :{
@@ -60,7 +60,7 @@
 			},
 			// 数据
 			series : [ {
-				name : '销量',
+				name : '车辆数',
 				type : 'bar',
 				//data : [ 5, 20, 36, 10, 10, 20 ],
 				data:[],

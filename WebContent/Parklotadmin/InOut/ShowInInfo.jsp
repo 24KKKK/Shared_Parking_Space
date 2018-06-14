@@ -19,12 +19,9 @@
 <link
 	href="/Shared_Parking_Space/bootstrap/css/bootstrap-datetimepicker.min.css"
 	rel="stylesheet" media="screen">
-
 </head>
-
 <body>
 	<br>
-
 	<!-- 场内停车信息筛选条件 -->
 	<form class="form-inline" action="/Shared_Parking_Space/QueryInInfoDao"
 		method="post">
@@ -44,7 +41,7 @@
 				<option value="startindatetime">时刻之后进入</option>
 				<option value="endindatetime">时刻之前进入</option>
 			</select>
-			<input type="text" class="form-control form_datetime" id="input_text_selectinfo"
+			<input type="text" class="form-control form-datetime" id="input_text_selectinfo"
 				name="selectvalue2" readonly="readonly">
 		</div>
 		<button type="submit" class="btn btn-success">查询</button>
@@ -118,7 +115,6 @@
 					for (int i = 1; i <= pageNum; i++) {
 			%>
 			<li><a href="/Shared_Parking_Space/QueryInInfoDao?pagenum=<%=i%>"><%=i%></a></li> 
-				 
 			<%
 				}
 				/* } */
@@ -141,7 +137,7 @@
 	<script type="text/javascript"
 		src="/Shared_Parking_Space/bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js"
 		charset="UTF-8"></script>
-	<script src="/Shared_Parking_Space/js/My.js"></script>
+	<script type="text/javascript" src="/Shared_Parking_Space/js/My.js"></script>
 <script type="text/javascript">
 
 	<%-- function changePageNum(pageNum){

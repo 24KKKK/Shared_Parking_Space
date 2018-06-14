@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>离开停车场车辆时段分布</title>
+<title>进入停车场车辆时段分布</title>
 <link href="/Shared_Parking_Space/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet" media="screen">
 <link
@@ -26,7 +26,7 @@
 				type="text" class="form-control form-statisdate" id="parkdate"
 				name="buystartparkdate" readonly="readonly">
 
-			<button class="btn btn-default btn-success" id="qry_caroutbydate">查询</button>
+			<button class="btn btn-default btn-success" id="qry_carinbydate">查询</button>
 		</div>
 	</div>
 
@@ -39,7 +39,7 @@
 		var option = {
 			// 图表名称
 			title : {
-				text : '离开车辆时段分布'
+				text : '进入车辆时段分布'
 			},
 			// 工具栏
 			tooltip : {},
@@ -105,16 +105,16 @@
 	
 	<script type="text/javascript">
 		$(function() {
-			$("#qry_caroutbydate").click(function() {
+			$("#qry_carinbydate").click(function() {
 				var option = myChart.getOption();
 				$.ajax({
 					type : "post",
 					async : false,
-					url : "/Shared_Parking_Space/ShowCarOutTime",
+					url : "/Shared_Parking_Space/ShowCarInTime",
 					datatype : "json",
 					data : {
-						 parkdate:$("#parkdate").val() 
-						//parkdate : "2018-06-03"
+						/* parkdate:$("#parkdate").val() */
+						parkdate : "2017-12-05"
 					},
 					success : function(result) {
 						alert("请求正确");

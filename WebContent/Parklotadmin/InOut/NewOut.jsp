@@ -58,7 +58,7 @@
 				<button type="submit" class="btn btn-default btn-success"
 					name="submit_addoutinfo">保存</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button type="reset" class="btn btn-default btn-warning">重置</button>
+				<!-- <button type="reset" class="btn btn-default btn-warning">重置</button> -->
 			</div>
 		</div>
 	</form>

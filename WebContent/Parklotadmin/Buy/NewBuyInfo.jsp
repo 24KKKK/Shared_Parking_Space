@@ -23,7 +23,7 @@
 
 	<form class="form-horizontal" name="form_newBuyInfo"
 		action="/Shared_Parking_Space/AddBuyInfoDao" method="post">
-
+		
 		<!-- 购买者信息 -->
 		<div class="form-group">
 			<label class="col-sm-2 control-label">姓名</label>
@@ -113,7 +113,7 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button type="reset" class="btn btn-default btn-warning">重置</button>
 			</div>
-		</div>
+		</div> 
 	</form>
 
 	<script type="text/javascript"

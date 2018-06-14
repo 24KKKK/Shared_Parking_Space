@@ -113,8 +113,8 @@
 					url : "/Shared_Parking_Space/ShowCarOutTime",
 					datatype : "json",
 					data : {
-						 parkdate:$("#parkdate").val() 
-						//parkdate : "2018-06-03"
+						/* parkdate:$("#parkdate").val() */
+						parkdate : "2017-12-06"
 					},
 					success : function(result) {
 						alert("请求正确");

@@ -44,7 +44,7 @@
 			<select class="form-control col-xs-4" name="selectkey2">
 				<option value="startindatetime">时刻之后进入</option>
 				<option value="endindatetime">时刻之前进入</option>
-			</select> <input type="text" class="form-control form_datetime"
+			</select> <input type="text" class="form-control form-datetime"
 				id="input_text_selectinfo" name="selectvalue2" readonly="readonly">
 		</div>
 		<button type="submit" class="btn btn-success">查询</button>

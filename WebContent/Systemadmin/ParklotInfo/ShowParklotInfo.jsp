@@ -30,7 +30,6 @@
 	}
 </script>
 </head>
-
 <body>
 	<br>
 
@@ -44,7 +43,8 @@
 				<option value="parklotname">停车场名称</option>
 				<option value="parklotadminid">管理员编号</option>
 				<option value="parklotamount">车位数量</option>
-			</select> <input type="text" class="form-control" id="input_text_selectinfo"
+			</select> 
+			<input type="text" class="form-control" id="input_text_selectinfo"
 				name="selectvalue">
 		</div>
 		<button type="submit" class="btn btn-success">查询</button>
